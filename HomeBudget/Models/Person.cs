@@ -7,6 +7,6 @@ namespace HomeBudget.Models
         public int Id { get; set; }
         public string PersonName { get; set; }
         public int AccountId { get; set; }
-        public virtual List<Account> Accounts { get; set;}
+        public virtual List<BankAccount> Accounts { get; set;}
     }
 }

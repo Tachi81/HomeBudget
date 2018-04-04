@@ -5,7 +5,7 @@ using System.Web;
 
 namespace HomeBudget.Models
 {
-    public class Account
+    public class BankAccount
     {
         public int Id { get; set; }
         public double Balance { get; set; }
