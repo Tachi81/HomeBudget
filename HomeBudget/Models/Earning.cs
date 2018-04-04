@@ -5,18 +5,17 @@ using System.Web;
 
 namespace HomeBudget.Models
 {
-    public class Earning
+    public class Earning : MoveMoney
     {
-        private Account _account = new Account();
-        public Earning()
-        {
-
-        }
         public int Id { get; set; }
-        public Category CategoryName { get; set; }
         public double Income { get; set; }
-        public DateTime DateTime { get; set; }
-        public string EarningNote { get; set; }
+        public int AccountId { get; set; }
+        public int CategoryId { get; set; }
+        public int SubcategoryId { get; set; }
+
+        public virtual Account Account { get; set; }
+        public virtual Category CategoryName { get; set; }
+        public virtual SubCategory SubCategory { get; set; }
 
 
     }

@@ -5,18 +5,18 @@ using System.Web;
 
 namespace HomeBudget.Models
 {
-    public class Expense
+    public class Expense : MoveMoney
     {
-        public Expense()
-        {
-            
-        }
+        
         public int Id { get; set; }
-        public Account Account { get; set; }
-        public Category CategoryName { get; set; }
         public double Cost { get; set; }
-        public DateTime DateTime { get; set; }
-        public string ExpenseNote { get; set; }
+        public int AccountId { get; set; }
+        public int CategoryId { get; set; }
+        public int SubcategoryId { get; set; }
+
+        public virtual Account Account { get; set; }
+        public virtual Category CategoryName { get; set; }
+        public virtual SubCategory SubCategory { get; set; }
 
     }
 }
