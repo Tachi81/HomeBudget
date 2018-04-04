@@ -207,6 +207,14 @@
     <Compile Include="Migrations\201804041723266_AddedCategoryIdTiSubCategory.Designer.cs">
       <DependentUpon>201804041723266_AddedCategoryIdTiSubCategory.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804041809285_UpdatedKeysBeetweenTables.cs" />
+    <Compile Include="Migrations\201804041809285_UpdatedKeysBeetweenTables.Designer.cs">
+      <DependentUpon>201804041809285_UpdatedKeysBeetweenTables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804041821407_BugFix.cs" />
+    <Compile Include="Migrations\201804041821407_BugFix.Designer.cs">
+      <DependentUpon>201804041821407_BugFix.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Account.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -218,7 +226,6 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Person.cs" />
-    <Compile Include="Models\Transfers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -305,6 +312,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804041723266_AddedCategoryIdTiSubCategory.resx">
       <DependentUpon>201804041723266_AddedCategoryIdTiSubCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804041809285_UpdatedKeysBeetweenTables.resx">
+      <DependentUpon>201804041809285_UpdatedKeysBeetweenTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804041821407_BugFix.resx">
+      <DependentUpon>201804041821407_BugFix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
