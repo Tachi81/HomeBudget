@@ -12,7 +12,7 @@ namespace HomeBudget.Models
         {
 
         }
-        public int Earning_Id { get; set; }
+        public int Id { get; set; }
         public Category CategoryName { get; set; }
         public double Income { get; set; }
         public DateTime DateTime { get; set; }

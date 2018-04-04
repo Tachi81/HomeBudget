@@ -7,12 +7,12 @@ namespace HomeBudget.Models
 {
     public class Expense
     {
-        private Account _account = new Account();
         public Expense()
         {
             
         }
-        public int Expense_Id { get; set; }
+        public int Id { get; set; }
+        public Account Account { get; set; }
         public Category CategoryName { get; set; }
         public double Cost { get; set; }
         public DateTime DateTime { get; set; }

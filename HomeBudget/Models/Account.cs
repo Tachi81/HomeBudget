@@ -7,7 +7,7 @@ namespace HomeBudget.Models
 {
     public class Account
     {
-        public int Account_Id { get; set; }
+        public int Id { get; set; }
         public double Balance { get; set; }
         public string AccountName { get; set; }
         public virtual List<Person> AccountOwners { get; set; }
