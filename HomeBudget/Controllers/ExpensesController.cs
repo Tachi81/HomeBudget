@@ -6,19 +6,25 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using HomeBudget.DAL.Repositories;
 using HomeBudget.Models;
 
 namespace HomeBudget.Controllers
 {
     public class ExpensesController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly IExpensesRepository _expenseRepository;
+
+        public ExpensesController(IExpensesRepository expenseRepository)
+        {
+            _expenseRepository = expenseRepository;
+        }
 
         // GET: Expenses
         public ActionResult Index()
         {
-            var expenses = db.Expenses.Include(e => e.BankAccount).Include(e => e.CategoryName);
-            return View(expenses.ToList());
+            var expenses = _expenseRepository.GetWhere(e=>e.Id>0).ToList();
+            return View(expenses);
         }
 
         // GET: Expenses/Details/5
@@ -28,7 +34,8 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Expense expense = db.Expenses.Find(id);
+
+            Expense expense = _expenseRepository.GetWhere(e => e.Id == id).FirstOrDefault();
             if (expense == null)
             {
                 return HttpNotFound();
@@ -53,8 +60,8 @@ namespace HomeBudget.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Expenses.Add(expense);
-                db.SaveChanges();
+                
+               _expenseRepository.Create(expense);
                 return RedirectToAction("Index");
             }
 
@@ -70,7 +77,7 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Expense expense = db.Expenses.Find(id);
+            Expense expense = _expenseRepository.GetWhere(e => e.Id == id).FirstOrDefault();
             if (expense == null)
             {
                 return HttpNotFound();
@@ -85,12 +92,11 @@ namespace HomeBudget.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Cost,BankAccountId,CategoryId,SubcategoryId,DateTime,Note")] Expense expense)
+        public ActionResult Edit( Expense expense)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(expense).State = EntityState.Modified;
-                db.SaveChanges();
+                _expenseRepository.Update(expense);
                 return RedirectToAction("Index");
             }
             ViewBag.BankAccountId = new SelectList(db.BankAccounts, "Id", "AccountName", expense.BankAccountId);
@@ -105,7 +111,7 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Expense expense = db.Expenses.Find(id);
+            Expense expense = _expenseRepository.GetWhere(e => e.Id == id).FirstOrDefault();
             if (expense == null)
             {
                 return HttpNotFound();
@@ -118,19 +124,12 @@ namespace HomeBudget.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Expense expense = db.Expenses.Find(id);
-            db.Expenses.Remove(expense);
-            db.SaveChanges();
+            Expense expense = _expenseRepository.GetWhere(e => e.Id == id).FirstOrDefault();
+            _expenseRepository.Delete(expense);
+ 
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+       
     }
 }
