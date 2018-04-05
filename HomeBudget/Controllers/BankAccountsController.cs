@@ -6,18 +6,25 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using HomeBudget.DAL.Interfaces;
 using HomeBudget.Models;
 
 namespace HomeBudget.Controllers
 {
+    [Authorize]
     public class BankAccountsController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly IBankAccountRepository _bankAccountRepository;
+
+        public BankAccountsController(IBankAccountRepository bankAccountRepository)
+        {
+            _bankAccountRepository = bankAccountRepository;
+        }
 
         // GET: BankAccounts
         public ActionResult Index()
         {
-            return View(db.BankAccounts.ToList());
+            return View("Index", _bankAccountRepository.GetWhere(x => x.Id > 0));
         }
 
         // GET: BankAccounts/Details/5
@@ -27,7 +34,8 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BankAccount bankAccount = db.BankAccounts.Find(id);
+
+            var bankAccount = _bankAccountRepository.GetWhere(x => x.Id == id).FirstOrDefault();
             if (bankAccount == null)
             {
                 return HttpNotFound();
@@ -46,12 +54,11 @@ namespace HomeBudget.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Balance,AccountName,OwnersNames")] BankAccount bankAccount)
+        public ActionResult Create(BankAccount bankAccount)
         {
             if (ModelState.IsValid)
             {
-                db.BankAccounts.Add(bankAccount);
-                db.SaveChanges();
+               _bankAccountRepository.Create(bankAccount);
                 return RedirectToAction("Index");
             }
 
@@ -65,7 +72,7 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BankAccount bankAccount = db.BankAccounts.Find(id);
+            var bankAccount = _bankAccountRepository.GetWhere(x => x.Id == id).FirstOrDefault();
             if (bankAccount == null)
             {
                 return HttpNotFound();
@@ -78,12 +85,11 @@ namespace HomeBudget.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Balance,AccountName,OwnersNames")] BankAccount bankAccount)
+        public ActionResult Edit(BankAccount bankAccount)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(bankAccount).State = EntityState.Modified;
-                db.SaveChanges();
+               _bankAccountRepository.Update(bankAccount);
                 return RedirectToAction("Index");
             }
             return View(bankAccount);
@@ -96,7 +102,7 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            BankAccount bankAccount = db.BankAccounts.Find(id);
+            var bankAccount = _bankAccountRepository.GetWhere(x => x.Id == id).FirstOrDefault();
             if (bankAccount == null)
             {
                 return HttpNotFound();
@@ -109,19 +115,10 @@ namespace HomeBudget.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            BankAccount bankAccount = db.BankAccounts.Find(id);
-            db.BankAccounts.Remove(bankAccount);
-            db.SaveChanges();
+            var bankAccount = _bankAccountRepository.GetWhere(x => x.Id == id).FirstOrDefault();
+           _bankAccountRepository.Delete(bankAccount);
             return RedirectToAction("Index");
         }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+       
     }
 }
