@@ -1,3 +1,5 @@
+using Ninject.Web.Common.WebHost;
+
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(HomeBudget.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(HomeBudget.App_Start.NinjectWebCommon), "Stop")]
 
@@ -14,7 +16,6 @@ namespace HomeBudget.App_Start
     public static class NinjectWebCommon 
     {
         private static readonly Bootstrapper bootstrapper = new Bootstrapper();
-
         /// <summary>
         /// Starts the application
         /// </summary>
