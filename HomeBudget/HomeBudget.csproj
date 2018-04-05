@@ -190,6 +190,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BankAccountsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
@@ -215,8 +216,16 @@
     <Compile Include="Migrations\201804041821407_BugFix.Designer.cs">
       <DependentUpon>201804041821407_BugFix.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804041856528_ChangedAccountToBankAccount.cs" />
+    <Compile Include="Migrations\201804041856528_ChangedAccountToBankAccount.Designer.cs">
+      <DependentUpon>201804041856528_ChangedAccountToBankAccount.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804050010282_DeletedPersonAndAccountOwner.cs" />
+    <Compile Include="Migrations\201804050010282_DeletedPersonAndAccountOwner.Designer.cs">
+      <DependentUpon>201804050010282_DeletedPersonAndAccountOwner.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\BankAccount.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Earning.cs" />
     <Compile Include="Models\Expense.cs" />
@@ -225,7 +234,6 @@
     <Compile Include="Models\SubCategory.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -265,7 +273,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
     <Content Include="Views\Account\ConfirmEmail.cshtml" />
     <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
@@ -286,9 +293,16 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\BankAccounts\Create.cshtml" />
+    <Content Include="Views\BankAccounts\Delete.cshtml" />
+    <Content Include="Views\BankAccounts\Details.cshtml" />
+    <Content Include="Views\BankAccounts\Edit.cshtml" />
+    <Content Include="Views\BankAccounts\Index.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Business_Logic\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -318,6 +332,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804041821407_BugFix.resx">
       <DependentUpon>201804041821407_BugFix.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804041856528_ChangedAccountToBankAccount.resx">
+      <DependentUpon>201804041856528_ChangedAccountToBankAccount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804050010282_DeletedPersonAndAccountOwner.resx">
+      <DependentUpon>201804050010282_DeletedPersonAndAccountOwner.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
