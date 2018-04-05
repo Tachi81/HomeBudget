@@ -19,7 +19,7 @@ namespace HomeBudget.Migrations
             RenameColumn(table: "dbo.Expenses", name: "Account_Id", newName: "AccountId");
             RenameColumn(table: "dbo.Earnings", name: "CategoryName_Id", newName: "CategoryId");
             RenameColumn(table: "dbo.Expenses", name: "CategoryName_Id", newName: "CategoryId");
-            AddColumn("dbo.Accounts", "PersonId", c => c.Int(nullable: false));
+            AddColumn("dbo.Accounts", "OwnersNames", c => c.String(nullable: false));
             AddColumn("dbo.Earnings", "SubcategoryId", c => c.Int(nullable: false));
             AddColumn("dbo.Categories", "Name", c => c.String());
             AddColumn("dbo.Expenses", "SubcategoryId", c => c.Int(nullable: false));
@@ -54,7 +54,7 @@ namespace HomeBudget.Migrations
             DropColumn("dbo.Expenses", "SubcategoryId");
             DropColumn("dbo.Categories", "Name");
             DropColumn("dbo.Earnings", "SubcategoryId");
-            DropColumn("dbo.Accounts", "PersonId");
+            DropColumn("dbo.Accounts", "OwnersNames");
             RenameColumn(table: "dbo.Expenses", name: "CategoryId", newName: "CategoryName_Id");
             RenameColumn(table: "dbo.Earnings", name: "CategoryId", newName: "CategoryName_Id");
             RenameColumn(table: "dbo.Expenses", name: "AccountId", newName: "Account_Id");
