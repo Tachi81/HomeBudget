@@ -46,7 +46,7 @@ namespace HomeBudget.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Balance,AccountName,PersonId")] BankAccount bankAccount)
+        public ActionResult Create([Bind(Include = "Id,Balance,AccountName,OwnersNames")] BankAccount bankAccount)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace HomeBudget.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Balance,AccountName,PersonId")] BankAccount bankAccount)
+        public ActionResult Edit([Bind(Include = "Id,Balance,AccountName,OwnersNames")] BankAccount bankAccount)
         {
             if (ModelState.IsValid)
             {
