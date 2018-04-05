@@ -48,6 +48,7 @@ namespace HomeBudget.App_Start
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
                 kernel.Bind<IBankAccountRepository>().To<BankAccountRepository>();
+                kernel.Bind<IExpensesRepository>().To<ExpensesRepository>();
 
                 RegisterServices(kernel);
                 return kernel;

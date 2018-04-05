@@ -9,7 +9,7 @@ using HomeBudget.Models;
 
 namespace HomeBudget.DAL.Repositories
 {
-    public class AbstractRepository<T> :IAbstractRepository<T> where T : class
+    public class AbstractRepository<T> :IAbstractRepository<T> , IGetListWithIncludes<T> where T : class
     {
         public void Create(T entity)
         {
@@ -35,6 +35,18 @@ namespace HomeBudget.DAL.Repositories
             using (var context = new ApplicationDbContext())
             {
                 var query = context.Set<T>().Where(expression);
+                return query.ToList();
+            }
+        }
+
+        public virtual List<T> GetWhereWithIncludes(Expression<Func<T, bool>> expressionWhere, params Expression<Func<T, object>>[] includes)
+        {
+            using (var context = new ApplicationDbContext())
+            {
+                IQueryable<T> query = context.Set<T>();
+                foreach (Expression<Func<T, object>> include in includes)
+                    query = query.Include(include);
+                query = query.Where(expressionWhere);
                 return query.ToList();
             }
         }
