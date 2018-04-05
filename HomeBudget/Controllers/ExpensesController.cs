@@ -49,7 +49,7 @@ namespace HomeBudget.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Cost,BankAccountId,CategoryId,SubcategoryId,DateTime,Note")] Expense expense)
+        public ActionResult Create( Expense expense)
         {
             if (ModelState.IsValid)
             {
