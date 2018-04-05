@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using HomeBudget.DAL.Interfaces;
 
 namespace HomeBudget.Models
 {
-    public class BankAccount
+    public class BankAccount 
     {
         public int Id { get; set; }
         public double Balance { get; set; }

@@ -3,28 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using HomeBudget.DAL.Interfaces;
 using HomeBudget.Models;
 
 namespace HomeBudget.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
-
-        private ApplicationDbContext db = new ApplicationDbContext();
-
-
+        private readonly IBankAccountRepository _bankAccount;
+        
+        public  HomeController(IBankAccountRepository bankAccount)
+        {
+            _bankAccount = bankAccount;
+        }
         public ActionResult Index()
         {
-            return View(db.BankAccounts.ToList());
+            
+            return View("Index", _bankAccount.GetWhere(x => x.Id > 0));
         }
-
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
+        
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
