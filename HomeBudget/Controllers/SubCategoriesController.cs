@@ -14,10 +14,12 @@ namespace HomeBudget.Controllers
     public class SubCategoriesController : Controller
     {
         private readonly ISubCategoriesRepository _subCategoriesRepository;
+        private readonly ICategoriesRepository _categoriesRepository;
 
-        public SubCategoriesController(ISubCategoriesRepository subCategoriesRepository)
+        public SubCategoriesController(ISubCategoriesRepository subCategoriesRepository, ICategoriesRepository categoriesRepository)
         {
             _subCategoriesRepository = subCategoriesRepository;
+            _categoriesRepository = categoriesRepository;
         }
 
         // GET: SubCategories
@@ -45,8 +47,8 @@ namespace HomeBudget.Controllers
         // GET: SubCategories/Create
         public ActionResult Create()
         {
-
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
+            var categories = _categoriesRepository.GetWhere(x => x.Id > 0).ToList();
+            ViewBag.CategoryId = new SelectList(categories, "Id", "Name");
             return View();
         }
 
@@ -63,7 +65,8 @@ namespace HomeBudget.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", subCategory.CategoryId);
+            var categories = _categoriesRepository.GetWhere(x => x.Id > 0).ToList();
+            ViewBag.CategoryId = new SelectList(categories, "Id", "Name", subCategory.CategoryId);
             return View(subCategory);
         }
 
@@ -79,7 +82,9 @@ namespace HomeBudget.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", subCategory.CategoryId);
+
+            var categories = _categoriesRepository.GetWhere(x => x.Id > 0).ToList();
+            ViewBag.CategoryId = new SelectList(categories, "Id", "Name", subCategory.CategoryId);
             return View(subCategory);
         }
 
@@ -95,7 +100,9 @@ namespace HomeBudget.Controllers
                 _subCategoriesRepository.Update(subCategory);
                 return RedirectToAction("Index");
             }
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", subCategory.CategoryId);
+
+            var categories = _categoriesRepository.GetWhere(x => x.Id > 0).ToList();
+            ViewBag.CategoryId = new SelectList(categories, "Id", "Name", subCategory.CategoryId);
             return View(subCategory);
         }
 

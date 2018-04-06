@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using HomeBudget.DAL.Interfaces;
 using HomeBudget.DAL.Repositories;
 using HomeBudget.Models;
 
@@ -14,10 +15,18 @@ namespace HomeBudget.Controllers
     public class ExpensesController : Controller
     {
         private readonly IExpensesRepository _expenseRepository;
+        private readonly IBankAccountRepository _bankAccountRepository;
+        private readonly ICategoriesRepository _categoriesRepository;
+        private readonly ISubCategoriesRepository _subCategoriesRepository;
 
-        public ExpensesController(IExpensesRepository expenseRepository)
+        public ExpensesController(IExpensesRepository expenseRepository, IBankAccountRepository bankAccountRepository,
+            ICategoriesRepository categoriesRepository, ISubCategoriesRepository subCategoriesRepository)
         {
             _expenseRepository = expenseRepository;
+            _bankAccountRepository = bankAccountRepository;
+            _categoriesRepository = categoriesRepository;
+            _subCategoriesRepository = subCategoriesRepository;
+            
         }
 
         // GET: Expenses
@@ -46,14 +55,9 @@ namespace HomeBudget.Controllers
         // GET: Expenses/Create
         public ActionResult Create()
         {
-            var bankAccountRepository = new BankAccountRepository();
-            var bankAccounts = bankAccountRepository.GetWhere(x => x.Id > 0).ToList();
-
-            var categoriesRepository = new CategoriesRepository();
-            var categories = categoriesRepository.GetWhere(x => x.Id > 0).ToList();
-
-            var subCategoriesRepository = new SubCategoriesRepository();
-            var subCategories = subCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
+            var bankAccounts = _bankAccountRepository.GetWhere(x => x.Id > 0).ToList();
+            var categories = _categoriesRepository.GetWhere(x => x.Id > 0).ToList();
+            var subCategories = _subCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
 
             ViewBag.BankAccountId = new SelectList(bankAccounts, "Id", "AccountName");
             ViewBag.CategoryId = new SelectList(categories, "Id", "Name");
@@ -75,14 +79,9 @@ namespace HomeBudget.Controllers
                 return RedirectToAction("Index");
             }
 
-            var bankAccountRepository = new BankAccountRepository();
-            var bankAccounts = bankAccountRepository.GetWhere(x => x.Id > 0).ToList();
-
-            var categoriesRepository = new CategoriesRepository();
-            var categories = categoriesRepository.GetWhere(x => x.Id > 0).ToList();
-
-            var subCategoriesRepository = new SubCategoriesRepository();
-            var subCategories = subCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
+            var bankAccounts = _bankAccountRepository.GetWhere(x => x.Id > 0).ToList();
+            var categories = _categoriesRepository.GetWhere(x => x.Id > 0).ToList();
+            var subCategories = _subCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
 
             ViewBag.BankAccountId = new SelectList(bankAccounts, "Id", "AccountName");
             ViewBag.CategoryId = new SelectList(categories, "Id", "Name");
@@ -103,14 +102,10 @@ namespace HomeBudget.Controllers
             {
                 return HttpNotFound();
             }
-            var bankAccountRepository = new BankAccountRepository();
-            var bankAccounts = bankAccountRepository.GetWhere(x => x.Id > 0).ToList();
 
-            var categoriesRepository = new CategoriesRepository();
-            var categories = categoriesRepository.GetWhere(x => x.Id > 0).ToList();
-
-            var subCategoriesRepository = new SubCategoriesRepository();
-            var subCategories = subCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
+            var bankAccounts = _bankAccountRepository.GetWhere(x => x.Id > 0).ToList();
+            var categories = _categoriesRepository.GetWhere(x => x.Id > 0).ToList();
+            var subCategories = _subCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
 
             ViewBag.BankAccountId = new SelectList(bankAccounts, "Id", "AccountName");
             ViewBag.CategoryId = new SelectList(categories, "Id", "Name");
@@ -132,14 +127,9 @@ namespace HomeBudget.Controllers
                 return RedirectToAction("Index");
             }
 
-            var bankAccountRepository = new BankAccountRepository();
-            var bankAccounts = bankAccountRepository.GetWhere(x => x.Id > 0).ToList();
-
-            var categoriesRepository = new CategoriesRepository();
-            var categories = categoriesRepository.GetWhere(x => x.Id > 0).ToList();
-
-            var subCategoriesRepository = new SubCategoriesRepository();
-            var subCategories = subCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
+            var bankAccounts = _bankAccountRepository.GetWhere(x => x.Id > 0).ToList();
+            var categories = _categoriesRepository.GetWhere(x => x.Id > 0).ToList();
+            var subCategories = _subCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
 
             ViewBag.BankAccountId = new SelectList(bankAccounts, "Id", "AccountName");
             ViewBag.CategoryId = new SelectList(categories, "Id", "Name");
