@@ -25,8 +25,8 @@ namespace HomeBudget.Controllers
         // GET: SubCategories
         public ActionResult Index()
         {
-            
-            return View();
+            var a = _subCategoriesRepository.GetWhereWithIncludes(x => x.Id > 0,x=>x.Category).ToList();
+            return View( a);
         }
 
         // GET: SubCategories/Details/5

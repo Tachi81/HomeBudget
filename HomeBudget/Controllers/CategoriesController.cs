@@ -14,7 +14,7 @@ namespace HomeBudget.Controllers
 {
     public class CategoriesController : Controller
     {
-        private ICategoriesRepository _categoriesRepository;
+        private readonly ICategoriesRepository _categoriesRepository;
 
         public CategoriesController(ICategoriesRepository categoriesRepository)
         {

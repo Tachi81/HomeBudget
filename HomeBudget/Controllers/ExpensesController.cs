@@ -32,7 +32,7 @@ namespace HomeBudget.Controllers
         // GET: Expenses
         public ActionResult Index()
         {
-            var expenses = _expenseRepository.GetWhere(e => e.Id > 0).ToList();
+            var expenses = _expenseRepository.GetWhereWithIncludes(e => e.Id > 0, x=>x.BankAccount, x=>x.SubCategory, x=>x.CategoryName).ToList();
             return View(expenses);
         }
 
@@ -61,7 +61,7 @@ namespace HomeBudget.Controllers
 
             ViewBag.BankAccountId = new SelectList(bankAccounts, "Id", "AccountName");
             ViewBag.CategoryId = new SelectList(categories, "Id", "Name");
-            ViewBag.SubCategoryId = new SelectList(subCategories, "Id", "Name");
+            ViewBag.SubCategoryId = new SelectList(subCategories, "Id", "SubCategoryName");
             return View();
         }
 
