@@ -19,7 +19,7 @@ namespace HomeBudget.Models
         public string Note { get; set; }
 
         public virtual BankAccount BankAccount { get; set; }
-        public virtual Category CategoryName { get; set; }
+        public virtual Category Category{ get; set; }
         public virtual SubCategory SubCategory { get; set; }
 
     }
