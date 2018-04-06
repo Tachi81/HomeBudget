@@ -25,8 +25,8 @@ namespace HomeBudget.Controllers
         // GET: SubCategories
         public ActionResult Index()
         {
-            var a = _subCategoriesRepository.GetWhereWithIncludes(x => x.Id > 0,x=>x.Category).ToList();
-            return View( a);
+            var subCategories = _subCategoriesRepository.GetWhereWithIncludes(x => x.Id > 0, x => x.Category).ToList();
+            return View(subCategories);
         }
 
         // GET: SubCategories/Details/5
@@ -36,7 +36,7 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SubCategory subCategory = _subCategoriesRepository.GetWhere(subCat => subCat.Id == id).FirstOrDefault();
+            SubCategory subCategory = _subCategoriesRepository.GetWhereWithIncludes(subCat => subCat.Id == id, x => x.Category).FirstOrDefault();
             if (subCategory == null)
             {
                 return HttpNotFound();
@@ -48,7 +48,7 @@ namespace HomeBudget.Controllers
         public ActionResult Create()
         {
             var categories = _categoriesRepository.GetWhere(x => x.Id > 0).ToList();
-            ViewBag.CategoryId = new SelectList(categories, "Id", "Name");
+            ViewBag.CategoryId = new SelectList(categories, "Id", "CategoryName");
             return View();
         }
 
@@ -61,12 +61,12 @@ namespace HomeBudget.Controllers
         {
             if (ModelState.IsValid)
             {
-               _subCategoriesRepository.Create(subCategory);
+                _subCategoriesRepository.Create(subCategory);
                 return RedirectToAction("Index");
             }
 
             var categories = _categoriesRepository.GetWhere(x => x.Id > 0).ToList();
-            ViewBag.CategoryId = new SelectList(categories, "Id", "Name", subCategory.CategoryId);
+            ViewBag.CategoryId = new SelectList(categories, "Id", "CategoryName", subCategory.CategoryId);
             return View(subCategory);
         }
 
@@ -77,14 +77,14 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SubCategory subCategory = _subCategoriesRepository.GetWhere(subCat => subCat.Id == id).FirstOrDefault();
+            SubCategory subCategory = _subCategoriesRepository.GetWhereWithIncludes(subCat => subCat.Id == id, x => x.Category).FirstOrDefault();
             if (subCategory == null)
             {
                 return HttpNotFound();
             }
 
             var categories = _categoriesRepository.GetWhere(x => x.Id > 0).ToList();
-            ViewBag.CategoryId = new SelectList(categories, "Id", "Name", subCategory.CategoryId);
+            ViewBag.CategoryId = new SelectList(categories, "Id", "CategoryName", subCategory.CategoryId);
             return View(subCategory);
         }
 
@@ -93,7 +93,7 @@ namespace HomeBudget.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit( SubCategory subCategory)
+        public ActionResult Edit(SubCategory subCategory)
         {
             if (ModelState.IsValid)
             {
@@ -102,7 +102,7 @@ namespace HomeBudget.Controllers
             }
 
             var categories = _categoriesRepository.GetWhere(x => x.Id > 0).ToList();
-            ViewBag.CategoryId = new SelectList(categories, "Id", "Name", subCategory.CategoryId);
+            ViewBag.CategoryId = new SelectList(categories, "Id", "CategoryName", subCategory.CategoryId);
             return View(subCategory);
         }
 
@@ -113,7 +113,7 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SubCategory subCategory = _subCategoriesRepository.GetWhere(subCat => subCat.Id == id).FirstOrDefault();
+            SubCategory subCategory = _subCategoriesRepository.GetWhereWithIncludes(subCat => subCat.Id == id, x => x.Category).FirstOrDefault();
             if (subCategory == null)
             {
                 return HttpNotFound();
@@ -126,11 +126,11 @@ namespace HomeBudget.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            SubCategory subCategory = _subCategoriesRepository.GetWhere(subCat => subCat.Id == id).FirstOrDefault();
+            SubCategory subCategory = _subCategoriesRepository.GetWhereWithIncludes(subCat => subCat.Id == id, x => x.Category).FirstOrDefault();
             _subCategoriesRepository.Delete(subCategory);
             return RedirectToAction("Index");
         }
 
-       
+
     }
 }

@@ -32,7 +32,7 @@ namespace HomeBudget.Controllers
         // GET: Expenses
         public ActionResult Index()
         {
-            var expenses = _expenseRepository.GetWhereWithIncludes(e => e.Id > 0, x=>x.BankAccount, x=>x.SubCategory, x=>x.CategoryName).ToList();
+            var expenses = _expenseRepository.GetWhereWithIncludes(e => e.Id > 0, x=>x.BankAccount, x=>x.SubCategory, x=>x.Category).ToList();
             return View(expenses);
         }
 
@@ -44,7 +44,7 @@ namespace HomeBudget.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Expense expense = _expenseRepository.GetWhere(e => e.Id == id).FirstOrDefault();
+            Expense expense = _expenseRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.SubCategory, x => x.Category).FirstOrDefault();
             if (expense == null)
             {
                 return HttpNotFound();
@@ -60,7 +60,7 @@ namespace HomeBudget.Controllers
             var subCategories = _subCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
 
             ViewBag.BankAccountId = new SelectList(bankAccounts, "Id", "AccountName");
-            ViewBag.CategoryId = new SelectList(categories, "Id", "Name");
+            ViewBag.CategoryId = new SelectList(categories, "Id", "CategoryName");
             ViewBag.SubCategoryId = new SelectList(subCategories, "Id", "SubCategoryName");
             return View();
         }
@@ -84,8 +84,8 @@ namespace HomeBudget.Controllers
             var subCategories = _subCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
 
             ViewBag.BankAccountId = new SelectList(bankAccounts, "Id", "AccountName");
-            ViewBag.CategoryId = new SelectList(categories, "Id", "Name");
-            ViewBag.CategoryId = new SelectList(subCategories, "Id", "Name");
+            ViewBag.CategoryId = new SelectList(categories, "Id", "CategoryName");
+            ViewBag.SubCategoryId = new SelectList(subCategories, "Id", "SubCategoryName");
 
             return View(expense);
         }
@@ -97,7 +97,7 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Expense expense = _expenseRepository.GetWhere(e => e.Id == id).FirstOrDefault();
+            Expense expense = _expenseRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.SubCategory, x => x.Category).FirstOrDefault();
             if (expense == null)
             {
                 return HttpNotFound();
@@ -108,8 +108,8 @@ namespace HomeBudget.Controllers
             var subCategories = _subCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
 
             ViewBag.BankAccountId = new SelectList(bankAccounts, "Id", "AccountName");
-            ViewBag.CategoryId = new SelectList(categories, "Id", "Name");
-            ViewBag.CategoryId = new SelectList(subCategories, "Id", "Name");
+            ViewBag.CategoryId = new SelectList(categories, "Id", "CategoryName");
+            ViewBag.SubCategoryId = new SelectList(subCategories, "Id", "SubCategoryName");
 
             return View(expense);
         }
@@ -132,8 +132,8 @@ namespace HomeBudget.Controllers
             var subCategories = _subCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
 
             ViewBag.BankAccountId = new SelectList(bankAccounts, "Id", "AccountName");
-            ViewBag.CategoryId = new SelectList(categories, "Id", "Name");
-            ViewBag.CategoryId = new SelectList(subCategories, "Id", "Name");
+            ViewBag.CategoryId = new SelectList(categories, "Id", "CategoryName");
+            ViewBag.SubCategoryId = new SelectList(subCategories, "Id", "SubCategoryName");
             return View(expense);
         }
 
@@ -144,7 +144,7 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Expense expense = _expenseRepository.GetWhere(e => e.Id == id).FirstOrDefault();
+            Expense expense = _expenseRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.SubCategory, x => x.Category).FirstOrDefault();
             if (expense == null)
             {
                 return HttpNotFound();
@@ -157,7 +157,7 @@ namespace HomeBudget.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Expense expense = _expenseRepository.GetWhere(e => e.Id == id).FirstOrDefault();
+            Expense expense = _expenseRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.SubCategory, x => x.Category).FirstOrDefault();
             _expenseRepository.Delete(expense);
 
             return RedirectToAction("Index");

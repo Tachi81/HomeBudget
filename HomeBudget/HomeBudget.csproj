@@ -239,6 +239,10 @@
     <Compile Include="Migrations\201804061640543_asdsasadsada.Designer.cs">
       <DependentUpon>201804061640543_asdsasadsada.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804062133348_InCategoryClassChangedNameToCategoryName.cs" />
+    <Compile Include="Migrations\201804062133348_InCategoryClassChangedNameToCategoryName.Designer.cs">
+      <DependentUpon>201804062133348_InCategoryClassChangedNameToCategoryName.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BankAccount.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -350,6 +354,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804061640543_asdsasadsada.resx">
       <DependentUpon>201804061640543_asdsasadsada.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804062133348_InCategoryClassChangedNameToCategoryName.resx">
+      <DependentUpon>201804062133348_InCategoryClassChangedNameToCategoryName.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
