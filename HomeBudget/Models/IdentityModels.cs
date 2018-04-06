@@ -29,10 +29,10 @@ namespace HomeBudget.Models
         {
             return new ApplicationDbContext();
         }
-       
-        DbSet<Earning> Earnings { get; set; }
-      
-        DbSet<SubCategory> SubCategories { get; set; }
+
+        public DbSet<Earning> Earnings { get; set; }
+
+        public DbSet<SubCategory> SubCategories { get; set; }
 
         public System.Data.Entity.DbSet<HomeBudget.Models.BankAccount> BankAccounts { get; set; }
 

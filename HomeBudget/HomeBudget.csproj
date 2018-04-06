@@ -220,40 +220,15 @@
     <Compile Include="DAL\Repositories\AbstractRepository.cs" />
     <Compile Include="DAL\Repositories\BankAccountRepository.cs" />
     <Compile Include="DAL\Interfaces\IBankAccountRepository.cs" />
+    <Compile Include="DAL\Repositories\CategoriesRepository.cs" />
     <Compile Include="DAL\Repositories\ExpensesRepository.cs" />
     <Compile Include="DAL\Interfaces\IExpensesRepository.cs" />
+    <Compile Include="DAL\Interfaces\ICategoriesRepository.cs" />
+    <Compile Include="DAL\Interfaces\ISubCategoriesRepository.cs" />
+    <Compile Include="DAL\Repositories\SubCategoriesRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201803291808429_InitialCreate.cs" />
-    <Compile Include="Migrations\201803291808429_InitialCreate.Designer.cs">
-      <DependentUpon>201803291808429_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804041718430_CreatedDataBase.cs" />
-    <Compile Include="Migrations\201804041718430_CreatedDataBase.Designer.cs">
-      <DependentUpon>201804041718430_CreatedDataBase.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804041723266_AddedCategoryIdTiSubCategory.cs" />
-    <Compile Include="Migrations\201804041723266_AddedCategoryIdTiSubCategory.Designer.cs">
-      <DependentUpon>201804041723266_AddedCategoryIdTiSubCategory.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804041809285_UpdatedKeysBeetweenTables.cs" />
-    <Compile Include="Migrations\201804041809285_UpdatedKeysBeetweenTables.Designer.cs">
-      <DependentUpon>201804041809285_UpdatedKeysBeetweenTables.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804041821407_BugFix.cs" />
-    <Compile Include="Migrations\201804041821407_BugFix.Designer.cs">
-      <DependentUpon>201804041821407_BugFix.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804041856528_ChangedAccountToBankAccount.cs" />
-    <Compile Include="Migrations\201804041856528_ChangedAccountToBankAccount.Designer.cs">
-      <DependentUpon>201804041856528_ChangedAccountToBankAccount.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804050010282_DeletedPersonAndAccountOwner.cs" />
-    <Compile Include="Migrations\201804050010282_DeletedPersonAndAccountOwner.Designer.cs">
-      <DependentUpon>201804050010282_DeletedPersonAndAccountOwner.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BankAccount.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Earning.cs" />
@@ -347,29 +322,6 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201803291808429_InitialCreate.resx">
-      <DependentUpon>201803291808429_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804041718430_CreatedDataBase.resx">
-      <DependentUpon>201804041718430_CreatedDataBase.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804041723266_AddedCategoryIdTiSubCategory.resx">
-      <DependentUpon>201804041723266_AddedCategoryIdTiSubCategory.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804041809285_UpdatedKeysBeetweenTables.resx">
-      <DependentUpon>201804041809285_UpdatedKeysBeetweenTables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804041821407_BugFix.resx">
-      <DependentUpon>201804041821407_BugFix.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804041856528_ChangedAccountToBankAccount.resx">
-      <DependentUpon>201804041856528_ChangedAccountToBankAccount.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804050010282_DeletedPersonAndAccountOwner.resx">
-      <DependentUpon>201804050010282_DeletedPersonAndAccountOwner.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
