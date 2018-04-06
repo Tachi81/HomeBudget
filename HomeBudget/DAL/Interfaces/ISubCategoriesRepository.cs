@@ -2,7 +2,7 @@
 
 namespace HomeBudget.DAL.Interfaces
 {
-    internal interface ISubCategoriesRepository : IAbstractRepository<SubCategory>
+    public interface ISubCategoriesRepository : IAbstractRepository<SubCategory>
     {
     }
 }

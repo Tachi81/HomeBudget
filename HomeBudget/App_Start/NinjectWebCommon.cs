@@ -49,6 +49,11 @@ namespace HomeBudget.App_Start
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
                 kernel.Bind<IBankAccountRepository>().To<BankAccountRepository>();
                 kernel.Bind<IExpensesRepository>().To<ExpensesRepository>();
+                kernel.Bind<ICategoriesRepository>().To<CategoriesRepository>();
+                kernel.Bind<ISubCategoriesRepository>().To<SubCategoriesRepository>();
+
+
+
 
                 RegisterServices(kernel);
                 return kernel;
