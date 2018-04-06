@@ -9,7 +9,7 @@ using HomeBudget.Models;
 
 namespace HomeBudget.DAL.Repositories
 {
-    public class AbstractRepository<T> :IAbstractRepository<T> , IGetListWithIncludes<T> where T : class
+    public class AbstractRepository<T> : IAbstractRepository<T>, IGetListWithIncludes<T> where T : class
     {
         public void Create(T entity)
         {
@@ -24,7 +24,7 @@ namespace HomeBudget.DAL.Repositories
         {
             using (var context = new ApplicationDbContext())
             {
-               
+
                 context.Entry(entity).State = EntityState.Deleted;
                 context.SaveChanges();
             }
@@ -55,7 +55,7 @@ namespace HomeBudget.DAL.Repositories
         {
             using (var context = new ApplicationDbContext())
             {
-               
+
                 context.Entry(entity).State = EntityState.Modified;
                 context.SaveChanges();
             }

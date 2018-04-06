@@ -46,8 +46,18 @@ namespace HomeBudget.Controllers
         // GET: Expenses/Create
         public ActionResult Create()
         {
-            ViewBag.BankAccountId = new SelectList(db.BankAccounts, "Id", "AccountName");
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name");
+            var bankAccountRepository = new BankAccountRepository();
+            var bankAccounts = bankAccountRepository.GetWhere(x => x.Id > 0).ToList();
+
+            var categoriesRepository = new CategoriesRepository();
+            var categories = categoriesRepository.GetWhere(x => x.Id > 0).ToList();
+
+            var subCategoriesRepository = new SubCategoriesRepository();
+            var subCategories = subCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
+
+            ViewBag.BankAccountId = new SelectList(bankAccounts, "Id", "AccountName");
+         ViewBag.CategoryId = new SelectList(categories, "Id", "Name");
+            ViewBag.CategoryId = new SelectList(subCategories, "Id", "Name");
             return View();
         }
 
@@ -65,8 +75,19 @@ namespace HomeBudget.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.BankAccountId = new SelectList(db.BankAccounts, "Id", "AccountName", expense.BankAccountId);
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", expense.CategoryId);
+            var bankAccountRepository = new BankAccountRepository();
+            var bankAccounts = bankAccountRepository.GetWhere(x => x.Id > 0).ToList();
+
+            var categoriesRepository = new CategoriesRepository();
+            var categories = categoriesRepository.GetWhere(x => x.Id > 0).ToList();
+
+            var subCategoriesRepository = new SubCategoriesRepository();
+            var subCategories = subCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
+
+            ViewBag.BankAccountId = new SelectList(bankAccounts, "Id", "AccountName");
+            ViewBag.CategoryId = new SelectList(categories, "Id", "Name");
+            ViewBag.CategoryId = new SelectList(subCategories, "Id", "Name");
+
             return View(expense);
         }
 
@@ -82,8 +103,19 @@ namespace HomeBudget.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.BankAccountId = new SelectList(db.BankAccounts, "Id", "AccountName", expense.BankAccountId);
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", expense.CategoryId);
+            var bankAccountRepository = new BankAccountRepository();
+            var bankAccounts = bankAccountRepository.GetWhere(x => x.Id > 0).ToList();
+
+            var categoriesRepository = new CategoriesRepository();
+            var categories = categoriesRepository.GetWhere(x => x.Id > 0).ToList();
+
+            var subCategoriesRepository = new SubCategoriesRepository();
+            var subCategories = subCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
+
+            ViewBag.BankAccountId = new SelectList(bankAccounts, "Id", "AccountName");
+            ViewBag.CategoryId = new SelectList(categories, "Id", "Name");
+            ViewBag.CategoryId = new SelectList(subCategories, "Id", "Name");
+
             return View(expense);
         }
 
@@ -99,8 +131,19 @@ namespace HomeBudget.Controllers
                 _expenseRepository.Update(expense);
                 return RedirectToAction("Index");
             }
-            ViewBag.BankAccountId = new SelectList(db.BankAccounts, "Id", "AccountName", expense.BankAccountId);
-            ViewBag.CategoryId = new SelectList(db.Categories, "Id", "Name", expense.CategoryId);
+
+            var bankAccountRepository = new BankAccountRepository();
+            var bankAccounts = bankAccountRepository.GetWhere(x => x.Id > 0).ToList();
+
+            var categoriesRepository = new CategoriesRepository();
+            var categories = categoriesRepository.GetWhere(x => x.Id > 0).ToList();
+
+            var subCategoriesRepository = new SubCategoriesRepository();
+            var subCategories = subCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
+
+            ViewBag.BankAccountId = new SelectList(bankAccounts, "Id", "AccountName");
+            ViewBag.CategoryId = new SelectList(categories, "Id", "Name");
+            ViewBag.CategoryId = new SelectList(subCategories, "Id", "Name");
             return View(expense);
         }
 
