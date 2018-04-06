@@ -23,7 +23,7 @@ namespace HomeBudget.Controllers
         // GET: Expenses
         public ActionResult Index()
         {
-            var expenses = _expenseRepository.GetWhere(e=>e.Id>0).ToList();
+            var expenses = _expenseRepository.GetWhere(e => e.Id > 0).ToList();
             return View(expenses);
         }
 
@@ -56,8 +56,8 @@ namespace HomeBudget.Controllers
             var subCategories = subCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
 
             ViewBag.BankAccountId = new SelectList(bankAccounts, "Id", "AccountName");
-         ViewBag.CategoryId = new SelectList(categories, "Id", "Name");
-            ViewBag.CategoryId = new SelectList(subCategories, "Id", "Name");
+            ViewBag.CategoryId = new SelectList(categories, "Id", "Name");
+            ViewBag.SubCategoryId = new SelectList(subCategories, "Id", "Name");
             return View();
         }
 
@@ -66,12 +66,12 @@ namespace HomeBudget.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create( Expense expense)
+        public ActionResult Create(Expense expense)
         {
             if (ModelState.IsValid)
             {
-                
-               _expenseRepository.Create(expense);
+
+                _expenseRepository.Create(expense);
                 return RedirectToAction("Index");
             }
 
@@ -124,7 +124,7 @@ namespace HomeBudget.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit( Expense expense)
+        public ActionResult Edit(Expense expense)
         {
             if (ModelState.IsValid)
             {
@@ -169,10 +169,10 @@ namespace HomeBudget.Controllers
         {
             Expense expense = _expenseRepository.GetWhere(e => e.Id == id).FirstOrDefault();
             _expenseRepository.Delete(expense);
- 
+
             return RedirectToAction("Index");
         }
 
-       
+
     }
 }
