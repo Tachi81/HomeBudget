@@ -1,7 +1,7 @@
 ﻿@model HomeBudget.Models.Category
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Category";
 }
 
 <h2>Details</h2>
@@ -11,11 +11,11 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.CategoryName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.CategoryName)
         </dd>
 
     </dl>

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<HomeBudget.Models.Expense>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Expenses";
 }
 
 <h2>Index</h2>
@@ -15,13 +15,13 @@
             @Html.DisplayNameFor(model => model.BankAccount.AccountName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CategoryName.Name)
+            @Html.DisplayNameFor(model => model.Category.CategoryName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Cost)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SubcategoryId)
+            @Html.DisplayNameFor(model => model.SubCategory.SubCategoryName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.DateTime)
@@ -38,16 +38,16 @@
             @Html.DisplayFor(modelItem => item.BankAccount.AccountName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.CategoryName.Name)
+            @Html.DisplayFor(modelItem => item.Category.CategoryName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Cost)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.SubcategoryId)
+            @Html.DisplayFor(modelItem => item.SubCategory.SubCategoryName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DateTime)
+            @Html.DisplayFor(modelItem => item.DateTime.Date)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Note)

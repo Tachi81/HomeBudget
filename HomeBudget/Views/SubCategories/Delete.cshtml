@@ -1,7 +1,7 @@
 ﻿@model HomeBudget.Models.SubCategory
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "SubCategory";
 }
 
 <h2>Delete</h2>
@@ -12,11 +12,11 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Category.Name)
+            @Html.DisplayNameFor(model => model.Category.CategoryName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Category.Name)
+            @Html.DisplayFor(model => model.Category.CategoryName)
         </dd>
 
         <dt>
