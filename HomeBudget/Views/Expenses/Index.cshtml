@@ -4,7 +4,7 @@
     ViewBag.Title = "Expenses";
 }
 
-<h2>Index</h2>
+<h2>Expenses</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -15,10 +15,10 @@
             @Html.DisplayNameFor(model => model.BankAccount.AccountName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Category.CategoryName)
+            @Html.DisplayNameFor(model => model.Cost)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Cost)
+            @Html.DisplayNameFor(model => model.Category.CategoryName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.SubCategory.SubCategoryName)
@@ -38,16 +38,16 @@
             @Html.DisplayFor(modelItem => item.BankAccount.AccountName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Category.CategoryName)
+            @Html.DisplayFor(modelItem => item.Cost)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Cost)
+            @Html.DisplayFor(modelItem => item.Category.CategoryName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.SubCategory.SubCategoryName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.DateTime.Date)
+            @Html.DisplayFor(modelItem => item.DateTime.DayOfWeek)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Note)
