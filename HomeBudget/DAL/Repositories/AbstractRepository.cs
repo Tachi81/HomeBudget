@@ -9,9 +9,9 @@ using HomeBudget.Models;
 
 namespace HomeBudget.DAL.Repositories
 {
-    public class AbstractRepository<T> : IAbstractRepository<T>, IGetListWithIncludes<T> where T : class
+    public  class AbstractRepository<T> : IAbstractRepository<T>, IGetListWithIncludes<T> where T : class
     {
-        public void Create(T entity)
+        public virtual void Create(T entity)
         {
             using (var context = new ApplicationDbContext())
             {
@@ -20,7 +20,7 @@ namespace HomeBudget.DAL.Repositories
             }
         }
 
-        public void Delete(T entity)
+        public virtual void Delete(T entity)
         {
             using (var context = new ApplicationDbContext())
             {
@@ -30,7 +30,7 @@ namespace HomeBudget.DAL.Repositories
             }
         }
 
-        public List<T> GetWhere(Expression<Func<T, bool>> expression)
+        public virtual List<T> GetWhere(Expression<Func<T, bool>> expression)
         {
             using (var context = new ApplicationDbContext())
             {
@@ -51,7 +51,7 @@ namespace HomeBudget.DAL.Repositories
             }
         }
 
-        public void Update(T entity)
+        public virtual void Update(T entity)
         {
             using (var context = new ApplicationDbContext())
             {

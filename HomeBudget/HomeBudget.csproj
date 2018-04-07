@@ -231,17 +231,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804061632351_InitialCreate.cs" />
-    <Compile Include="Migrations\201804061632351_InitialCreate.Designer.cs">
-      <DependentUpon>201804061632351_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804061640543_asdsasadsada.cs" />
-    <Compile Include="Migrations\201804061640543_asdsasadsada.Designer.cs">
-      <DependentUpon>201804061640543_asdsasadsada.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804062133348_InCategoryClassChangedNameToCategoryName.cs" />
-    <Compile Include="Migrations\201804062133348_InCategoryClassChangedNameToCategoryName.Designer.cs">
-      <DependentUpon>201804062133348_InCategoryClassChangedNameToCategoryName.cs</DependentUpon>
+    <Compile Include="Migrations\201804070852314_FirstMigration.cs" />
+    <Compile Include="Migrations\201804070852314_FirstMigration.Designer.cs">
+      <DependentUpon>201804070852314_FirstMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -349,14 +341,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804061632351_InitialCreate.resx">
-      <DependentUpon>201804061632351_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804061640543_asdsasadsada.resx">
-      <DependentUpon>201804061640543_asdsasadsada.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804062133348_InCategoryClassChangedNameToCategoryName.resx">
-      <DependentUpon>201804062133348_InCategoryClassChangedNameToCategoryName.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804070852314_FirstMigration.resx">
+      <DependentUpon>201804070852314_FirstMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
