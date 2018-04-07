@@ -3,7 +3,7 @@ using HomeBudget.Models;
 
 namespace HomeBudget.DAL.Interfaces
 {
-    public interface IExpensesRepository : IAbstractRepository<Expense>, IGetListWithIncludes<Expense>
+    public interface IExpenseCategoriesRepository : IAbstractRepository<ExpenseCategory>
     {
     }
 }

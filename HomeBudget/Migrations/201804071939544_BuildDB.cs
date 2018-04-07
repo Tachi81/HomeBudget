@@ -3,7 +3,7 @@ namespace HomeBudget.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class FirstMigration : DbMigration
+    public partial class BuildDB : DbMigration
     {
         public override void Up()
         {
@@ -14,7 +14,7 @@ namespace HomeBudget.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         InitialBalance = c.Double(nullable: false),
                         Balance = c.Double(nullable: false),
-                        AccountName = c.String(),
+                        AccountName = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -43,7 +43,8 @@ namespace HomeBudget.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        CategoryName = c.String(),
+                        CategoryName = c.String(nullable: false),
+                        Discriminator = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -52,8 +53,9 @@ namespace HomeBudget.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        SubCategoryName = c.String(),
+                        SubCategoryName = c.String(nullable: false),
                         CategoryId = c.Int(nullable: false),
+                        Discriminator = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: false)

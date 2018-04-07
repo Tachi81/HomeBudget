@@ -12,13 +12,13 @@ namespace HomeBudget.Controllers
     {
         private readonly IExpensesRepository _expenseRepository;
         private readonly IBankAccountRepository _bankAccountRepository;
-        private readonly ICategoriesRepository _categoriesRepository;
-        private readonly ISubCategoriesRepository _subCategoriesRepository;
+        private readonly IExpenseCategoriesRepository _categoriesRepository;
+        private readonly IExpenseSubCategoriesRepository _subCategoriesRepository;
         private readonly IBankAccountLogic _bankAccountLogic;
 
         public ExpensesController(IExpensesRepository expenseRepository, IBankAccountRepository bankAccountRepository,
-            ICategoriesRepository categoriesRepository, IBankAccountLogic bankAccountLogic,
-            ISubCategoriesRepository subCategoriesRepository)
+            IExpenseCategoriesRepository categoriesRepository, IBankAccountLogic bankAccountLogic,
+            IExpenseSubCategoriesRepository subCategoriesRepository)
         {
             _expenseRepository = expenseRepository;
             _bankAccountRepository = bankAccountRepository;

@@ -215,38 +215,47 @@
     <Compile Include="DAL\Interfaces\IBankAccountLogic.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BankAccountsController.cs" />
-    <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\ExpenseCategoriesController.cs" />
     <Compile Include="Controllers\ExpensesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\SubCategoriesController.cs" />
+    <Compile Include="Controllers\ExpenseSubCategoriesController.cs" />
     <Compile Include="DAL\Interfaces\IAbstractRepository.cs" />
     <Compile Include="DAL\Interfaces\IGetListWithIncludes.cs" />
     <Compile Include="DAL\Repositories\AbstractRepository.cs" />
     <Compile Include="DAL\Repositories\BankAccountRepository.cs" />
     <Compile Include="DAL\Interfaces\IBankAccountRepository.cs" />
-    <Compile Include="DAL\Repositories\CategoriesRepository.cs" />
+    <Compile Include="DAL\Repositories\EarningCategoriesRepository.cs" />
+    <Compile Include="DAL\Repositories\EarningSubCategoriesRepository.cs" />
+    <Compile Include="DAL\Repositories\ExpenseSubCategoriesRepository .cs" />
+    <Compile Include="DAL\Repositories\ExpenseCategoriesRepository.cs" />
     <Compile Include="DAL\Repositories\EarningsRepository.cs" />
     <Compile Include="DAL\Repositories\ExpensesRepository.cs" />
     <Compile Include="DAL\Interfaces\IExpensesRepository.cs" />
-    <Compile Include="DAL\Interfaces\ICategoriesRepository.cs" />
-    <Compile Include="DAL\Interfaces\ISubCategoriesRepository.cs" />
     <Compile Include="DAL\Interfaces\IEarningsRepository.cs" />
+    <Compile Include="DAL\Interfaces\IExpenseCategoriesRepository.cs" />
+    <Compile Include="DAL\Interfaces\IEarningCategoriesRepository.cs" />
+    <Compile Include="DAL\Interfaces\IExpenseSubCategoriesRepository.cs" />
+    <Compile Include="DAL\Interfaces\IEarningSubCategoriesRepository.cs" />
     <Compile Include="DAL\Repositories\SubCategoriesRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804070852314_FirstMigration.cs" />
-    <Compile Include="Migrations\201804070852314_FirstMigration.Designer.cs">
-      <DependentUpon>201804070852314_FirstMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201804071939544_BuildDB.cs" />
+    <Compile Include="Migrations\201804071939544_BuildDB.Designer.cs">
+      <DependentUpon>201804071939544_BuildDB.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BankAccount.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Earning.cs" />
+    <Compile Include="Models\EarningCategory.cs" />
+    <Compile Include="Models\EarningSubCategory.cs" />
     <Compile Include="Models\Expense.cs" />
     <Compile Include="DAL\Interfaces\IMoveMoney.cs" />
+    <Compile Include="Models\ExpenseCategory.cs" />
+    <Compile Include="Models\ExpenseSubcategory.cs" />
     <Compile Include="Models\SubCategory.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -318,16 +327,16 @@
     <Content Include="Views\Expenses\Details.cshtml" />
     <Content Include="Views\Expenses\Edit.cshtml" />
     <Content Include="Views\Expenses\Index.cshtml" />
-    <Content Include="Views\Categories\Create.cshtml" />
-    <Content Include="Views\Categories\Delete.cshtml" />
-    <Content Include="Views\Categories\Details.cshtml" />
-    <Content Include="Views\Categories\Edit.cshtml" />
-    <Content Include="Views\Categories\Index.cshtml" />
-    <Content Include="Views\SubCategories\Create.cshtml" />
-    <Content Include="Views\SubCategories\Delete.cshtml" />
-    <Content Include="Views\SubCategories\Details.cshtml" />
-    <Content Include="Views\SubCategories\Edit.cshtml" />
-    <Content Include="Views\SubCategories\Index.cshtml" />
+    <Content Include="Views\ExpenseCategories\Create.cshtml" />
+    <Content Include="Views\ExpenseCategories\Delete.cshtml" />
+    <Content Include="Views\ExpenseCategories\Details.cshtml" />
+    <Content Include="Views\ExpenseCategories\Edit.cshtml" />
+    <Content Include="Views\ExpenseCategories\Index.cshtml" />
+    <Content Include="Views\ExpenseSubCategories\Create.cshtml" />
+    <Content Include="Views\ExpenseSubCategories\Delete.cshtml" />
+    <Content Include="Views\ExpenseSubCategories\Details.cshtml" />
+    <Content Include="Views\ExpenseSubCategories\Edit.cshtml" />
+    <Content Include="Views\ExpenseSubCategories\Index.cshtml" />
     <Content Include="Views\Earnings\Create.cshtml" />
     <Content Include="Views\Earnings\Delete.cshtml" />
     <Content Include="Views\Earnings\Details.cshtml" />
@@ -351,8 +360,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804070852314_FirstMigration.resx">
-      <DependentUpon>201804070852314_FirstMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804071939544_BuildDB.resx">
+      <DependentUpon>201804071939544_BuildDB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

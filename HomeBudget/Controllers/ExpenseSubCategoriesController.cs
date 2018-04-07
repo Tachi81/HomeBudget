@@ -6,12 +6,12 @@ using HomeBudget.Models;
 
 namespace HomeBudget.Controllers
 {
-    public class SubCategoriesController : Controller
+    public class ExpenseSubCategoriesController : Controller
     {
-        private readonly ISubCategoriesRepository _subCategoriesRepository;
-        private readonly ICategoriesRepository _categoriesRepository;
+        private readonly IExpenseCategoriesRepository _categoriesRepository;
+        private readonly IExpenseSubCategoriesRepository _subCategoriesRepository;
 
-        public SubCategoriesController(ISubCategoriesRepository subCategoriesRepository, ICategoriesRepository categoriesRepository)
+        public ExpenseSubCategoriesController(IExpenseSubCategoriesRepository subCategoriesRepository, IExpenseCategoriesRepository categoriesRepository)
         {
             _subCategoriesRepository = subCategoriesRepository;
             _categoriesRepository = categoriesRepository;
@@ -31,7 +31,7 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SubCategory subCategory = _subCategoriesRepository.GetWhereWithIncludes(subCat => subCat.Id == id, x => x.Category).FirstOrDefault();
+            ExpenseSubcategory subCategory = _subCategoriesRepository.GetWhereWithIncludes(subCat => subCat.Id == id, x => x.Category).FirstOrDefault();
             if (subCategory == null)
             {
                 return HttpNotFound();
@@ -52,7 +52,7 @@ namespace HomeBudget.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(SubCategory subCategory)
+        public ActionResult Create(ExpenseSubcategory subCategory)
         {
             if (ModelState.IsValid)
             {
@@ -72,7 +72,7 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SubCategory subCategory = _subCategoriesRepository.GetWhereWithIncludes(subCat => subCat.Id == id, x => x.Category).FirstOrDefault();
+            ExpenseSubcategory subCategory = _subCategoriesRepository.GetWhereWithIncludes(subCat => subCat.Id == id, x => x.Category).FirstOrDefault();
             if (subCategory == null)
             {
                 return HttpNotFound();
@@ -88,7 +88,7 @@ namespace HomeBudget.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(SubCategory subCategory)
+        public ActionResult Edit(ExpenseSubcategory subCategory)
         {
             if (ModelState.IsValid)
             {
@@ -108,7 +108,7 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SubCategory subCategory = _subCategoriesRepository.GetWhereWithIncludes(subCat => subCat.Id == id, x => x.Category).FirstOrDefault();
+            ExpenseSubcategory subCategory = _subCategoriesRepository.GetWhereWithIncludes(subCat => subCat.Id == id, x => x.Category).FirstOrDefault();
             if (subCategory == null)
             {
                 return HttpNotFound();
@@ -121,7 +121,7 @@ namespace HomeBudget.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            SubCategory subCategory = _subCategoriesRepository.GetWhereWithIncludes(subCat => subCat.Id == id, x => x.Category).FirstOrDefault();
+            ExpenseSubcategory subCategory = _subCategoriesRepository.GetWhereWithIncludes(subCat => subCat.Id == id, x => x.Category).FirstOrDefault();
             _subCategoriesRepository.Delete(subCategory);
             return RedirectToAction("Index");
         }

@@ -3,7 +3,7 @@ using HomeBudget.Models;
 
 namespace HomeBudget.DAL.Repositories
 {
-    public class SubCategoriesRepository : AbstractRepository<SubCategory>, ISubCategoriesRepository
+    public class SubCategoriesRepository 
     {
     }
 }

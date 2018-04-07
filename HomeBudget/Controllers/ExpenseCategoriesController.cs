@@ -6,19 +6,19 @@ using HomeBudget.Models;
 
 namespace HomeBudget.Controllers
 {
-    public class CategoriesController : Controller
+    public class ExpenseCategoriesController : Controller
     {
-        private readonly ICategoriesRepository _categoriesRepository;
+        private readonly IExpenseCategoriesRepository _expenseCategoriesRepository;
 
-        public CategoriesController(ICategoriesRepository categoriesRepository)
+        public ExpenseCategoriesController(IExpenseCategoriesRepository expenseCategoriesRepository)
         {
-            _categoriesRepository = categoriesRepository;
+            _expenseCategoriesRepository = expenseCategoriesRepository;
         }
 
         // GET: Categories
         public ActionResult Index()
         {
-            return View(_categoriesRepository.GetWhere(cat=>cat.Id>0).ToList());
+            return View(_expenseCategoriesRepository.GetWhere(cat=>cat.Id>0).ToList());
         }
 
         // GET: Categories/Details/5
@@ -29,7 +29,7 @@ namespace HomeBudget.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Category category = _categoriesRepository.GetWhere(cat => cat.Id == id).FirstOrDefault();
+            ExpenseCategory category = _expenseCategoriesRepository.GetWhere(cat => cat.Id == id).FirstOrDefault();
             if (category == null)
             {
                 return HttpNotFound();
@@ -48,11 +48,11 @@ namespace HomeBudget.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create( Category category)
+        public ActionResult Create( ExpenseCategory category)
         {
             if (ModelState.IsValid)
             {
-                _categoriesRepository.Create(category);
+                _expenseCategoriesRepository.Create(category);
                 return RedirectToAction("Index");
             }
 
@@ -66,7 +66,7 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = _categoriesRepository.GetWhere(cat => cat.Id == id).FirstOrDefault();
+            ExpenseCategory category = _expenseCategoriesRepository.GetWhere(cat => cat.Id == id).FirstOrDefault();
             if (category == null)
             {
                 return HttpNotFound();
@@ -79,11 +79,11 @@ namespace HomeBudget.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit( Category category)
+        public ActionResult Edit(ExpenseCategory category)
         {
             if (ModelState.IsValid)
             {
-                _categoriesRepository.Update(category);
+                _expenseCategoriesRepository.Update(category);
                 return RedirectToAction("Index");
             }
             return View(category);
@@ -96,7 +96,7 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = _categoriesRepository.GetWhere(cat => cat.Id == id).FirstOrDefault();
+            ExpenseCategory category = _expenseCategoriesRepository.GetWhere(cat => cat.Id == id).FirstOrDefault();
             if (category == null)
             {
                 return HttpNotFound();
@@ -109,8 +109,8 @@ namespace HomeBudget.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Category category = _categoriesRepository.GetWhere(cat => cat.Id == id).FirstOrDefault();
-           _categoriesRepository.Delete(category);
+            ExpenseCategory category = _expenseCategoriesRepository.GetWhere(cat => cat.Id == id).FirstOrDefault();
+            _expenseCategoriesRepository.Delete(category);
             return RedirectToAction("Index");
         }
         

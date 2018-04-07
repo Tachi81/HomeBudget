@@ -49,10 +49,16 @@ namespace HomeBudget.App_Start
                 kernel.Bind<Func<IKernel>>().ToMethod(ctx => () => new Bootstrapper().Kernel);
                 kernel.Bind<IHttpModule>().To<HttpApplicationInitializationHttpModule>();
                 kernel.Bind<IBankAccountRepository>().To<BankAccountRepository>();
+
                 kernel.Bind<IExpensesRepository>().To<ExpensesRepository>();
                 kernel.Bind<IEarningsRepository>().To<EarningsRepository>();
-                kernel.Bind<ICategoriesRepository>().To<CategoriesRepository>();
-                kernel.Bind<ISubCategoriesRepository>().To<SubCategoriesRepository>();
+
+                kernel.Bind<IExpenseCategoriesRepository>().To<ExpenseCategoriesRepository>();
+                kernel.Bind<IEarningCategoriesRepository>().To<EarningCategoriesRepository>();
+
+                kernel.Bind<IExpenseSubCategoriesRepository>().To<ExpenseSubCategoriesRepository>();
+                kernel.Bind<IEarningSubCategoriesRepository>().To<EarningSubCategoriesRepository>();
+
                 kernel.Bind<IBankAccountLogic>().To<BankAccountLogic>();
 
 

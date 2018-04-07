@@ -1,4 +1,5 @@
-﻿using HomeBudget.Models;
+﻿using HomeBudget.DAL.Interfaces;
+using HomeBudget.Models;
 
 namespace HomeBudget.DAL.Repositories
 {

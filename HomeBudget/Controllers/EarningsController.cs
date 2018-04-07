@@ -10,21 +10,21 @@ namespace HomeBudget.Controllers
 {
     public class EarningsController : Controller
     {
-        private readonly IExpensesRepository _expenseRepository;
+     
         private readonly IBankAccountRepository _bankAccountRepository;
-        private readonly ICategoriesRepository _categoriesRepository;
-        private readonly ISubCategoriesRepository _subCategoriesRepository;
+        private readonly IEarningCategoriesRepository _categoriesRepository;
+        private readonly IEarningSubCategoriesRepository _subCategoriesRepository;
         private readonly IBankAccountLogic _bankAccountLogic;
         private readonly IEarningsRepository _earningsRepository;
 
 
 
 
-        public EarningsController(IExpensesRepository expenseRepository, IBankAccountRepository bankAccountRepository,
-            ICategoriesRepository categoriesRepository, IBankAccountLogic bankAccountLogic, IEarningsRepository earningsRepository,
-        ISubCategoriesRepository subCategoriesRepository)
+        public EarningsController(IBankAccountRepository bankAccountRepository,
+            IEarningCategoriesRepository categoriesRepository, IBankAccountLogic bankAccountLogic, IEarningsRepository earningsRepository,
+            IEarningSubCategoriesRepository subCategoriesRepository)
         {
-            _expenseRepository = expenseRepository;
+           
             _bankAccountRepository = bankAccountRepository;
             _categoriesRepository = categoriesRepository;
             _subCategoriesRepository = subCategoriesRepository;
