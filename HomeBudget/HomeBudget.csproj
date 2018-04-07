@@ -211,6 +211,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Business_Logic\AuthorizationLogic.cs" />
     <Compile Include="Business_Logic\BankAccountLogic.cs" />
+    <Compile Include="Controllers\EarningsController.cs" />
     <Compile Include="DAL\Interfaces\IBankAccountLogic.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BankAccountsController.cs" />
@@ -225,10 +226,12 @@
     <Compile Include="DAL\Repositories\BankAccountRepository.cs" />
     <Compile Include="DAL\Interfaces\IBankAccountRepository.cs" />
     <Compile Include="DAL\Repositories\CategoriesRepository.cs" />
+    <Compile Include="DAL\Repositories\EarningsRepository.cs" />
     <Compile Include="DAL\Repositories\ExpensesRepository.cs" />
     <Compile Include="DAL\Interfaces\IExpensesRepository.cs" />
     <Compile Include="DAL\Interfaces\ICategoriesRepository.cs" />
     <Compile Include="DAL\Interfaces\ISubCategoriesRepository.cs" />
+    <Compile Include="DAL\Interfaces\IEarningsRepository.cs" />
     <Compile Include="DAL\Repositories\SubCategoriesRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -240,9 +243,9 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BankAccount.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Earning.cs" />
     <Compile Include="Models\Expense.cs" />
-    <Compile Include="Models\Category.cs" />
     <Compile Include="DAL\Interfaces\IMoveMoney.cs" />
     <Compile Include="Models\SubCategory.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -325,6 +328,11 @@
     <Content Include="Views\SubCategories\Details.cshtml" />
     <Content Include="Views\SubCategories\Edit.cshtml" />
     <Content Include="Views\SubCategories\Index.cshtml" />
+    <Content Include="Views\Earnings\Create.cshtml" />
+    <Content Include="Views\Earnings\Delete.cshtml" />
+    <Content Include="Views\Earnings\Details.cshtml" />
+    <Content Include="Views\Earnings\Edit.cshtml" />
+    <Content Include="Views\Earnings\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -5,9 +5,6 @@ using System.Text;
 using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using HomeBudget;
-using HomeBudget.Controllers;
-using HomeBudget.DAL.Interfaces;
-
 namespace HomeBudget.Tests.Controllers
 {
     [TestClass]
