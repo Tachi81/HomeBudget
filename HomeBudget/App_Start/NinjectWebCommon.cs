@@ -1,3 +1,4 @@
+using HomeBudget.Business_Logic;
 using HomeBudget.DAL.Interfaces;
 using HomeBudget.DAL.Repositories;
 using Ninject.Web.Common.WebHost;
@@ -51,6 +52,9 @@ namespace HomeBudget.App_Start
                 kernel.Bind<IExpensesRepository>().To<ExpensesRepository>();
                 kernel.Bind<ICategoriesRepository>().To<CategoriesRepository>();
                 kernel.Bind<ISubCategoriesRepository>().To<SubCategoriesRepository>();
+              
+                kernel.Bind<IBankAccountLogic>().To<BankAccountLogic>();
+
 
 
 

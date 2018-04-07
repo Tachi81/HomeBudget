@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using HomeBudget.Business_Logic;
 using HomeBudget.DAL.Interfaces;
 using HomeBudget.DAL.Repositories;
 using HomeBudget.Models;
@@ -18,15 +19,19 @@ namespace HomeBudget.Controllers
         private readonly IBankAccountRepository _bankAccountRepository;
         private readonly ICategoriesRepository _categoriesRepository;
         private readonly ISubCategoriesRepository _subCategoriesRepository;
+      
+        private readonly IBankAccountLogic _bankAccountLogic;
+
 
         public ExpensesController(IExpensesRepository expenseRepository, IBankAccountRepository bankAccountRepository,
-            ICategoriesRepository categoriesRepository, ISubCategoriesRepository subCategoriesRepository)
+            ICategoriesRepository categoriesRepository, IBankAccountLogic bankAccountLogic,
+            ISubCategoriesRepository subCategoriesRepository)
         {
             _expenseRepository = expenseRepository;
             _bankAccountRepository = bankAccountRepository;
             _categoriesRepository = categoriesRepository;
             _subCategoriesRepository = subCategoriesRepository;
-            
+            _bankAccountLogic = bankAccountLogic;
         }
 
         // GET: Expenses
@@ -74,8 +79,9 @@ namespace HomeBudget.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 _expenseRepository.Create(expense);
+           
+                _bankAccountLogic.CalculateAccountBalance(expense.BankAccountId);
                 return RedirectToAction("Index");
             }
 
@@ -124,6 +130,7 @@ namespace HomeBudget.Controllers
             if (ModelState.IsValid)
             {
                 _expenseRepository.Update(expense);
+                _bankAccountLogic.CalculateAccountBalance(expense.BankAccountId);
                 return RedirectToAction("Index");
             }
 
@@ -159,6 +166,8 @@ namespace HomeBudget.Controllers
         {
             Expense expense = _expenseRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.SubCategory, x => x.Category).FirstOrDefault();
             _expenseRepository.Delete(expense);
+            _bankAccountLogic.CalculateAccountBalance(expense.BankAccountId);
+
 
             return RedirectToAction("Index");
         }
