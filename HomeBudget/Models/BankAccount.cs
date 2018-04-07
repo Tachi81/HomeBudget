@@ -9,6 +9,7 @@ namespace HomeBudget.Models
     public class BankAccount 
     {
         public int Id { get; set; }
+        public double InitialBalance { get; set; }
         public double Balance { get; set; }
         public string AccountName { get; set; }
        

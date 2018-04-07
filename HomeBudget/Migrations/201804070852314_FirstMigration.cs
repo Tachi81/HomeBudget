@@ -3,7 +3,7 @@ namespace HomeBudget.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class FirstMigration : DbMigration
     {
         public override void Up()
         {
@@ -12,6 +12,7 @@ namespace HomeBudget.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
+                        InitialBalance = c.Double(nullable: false),
                         Balance = c.Double(nullable: false),
                         AccountName = c.String(),
                     })
@@ -42,7 +43,7 @@ namespace HomeBudget.Migrations
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
+                        CategoryName = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -52,11 +53,11 @@ namespace HomeBudget.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         SubCategoryName = c.String(),
-                        Category_Id = c.Int(),
+                        CategoryId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Categories", t => t.Category_Id)
-                .Index(t => t.Category_Id);
+                .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: false)
+                .Index(t => t.CategoryId);
             
             CreateTable(
                 "dbo.Expenses",
@@ -159,7 +160,7 @@ namespace HomeBudget.Migrations
             DropForeignKey("dbo.Expenses", "BankAccountId", "dbo.BankAccounts");
             DropForeignKey("dbo.Earnings", "SubcategoryId", "dbo.SubCategories");
             DropForeignKey("dbo.Earnings", "CategoryId", "dbo.Categories");
-            DropForeignKey("dbo.SubCategories", "Category_Id", "dbo.Categories");
+            DropForeignKey("dbo.SubCategories", "CategoryId", "dbo.Categories");
             DropForeignKey("dbo.Earnings", "BankAccountId", "dbo.BankAccounts");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
@@ -170,7 +171,7 @@ namespace HomeBudget.Migrations
             DropIndex("dbo.Expenses", new[] { "SubcategoryId" });
             DropIndex("dbo.Expenses", new[] { "CategoryId" });
             DropIndex("dbo.Expenses", new[] { "BankAccountId" });
-            DropIndex("dbo.SubCategories", new[] { "Category_Id" });
+            DropIndex("dbo.SubCategories", new[] { "CategoryId" });
             DropIndex("dbo.Earnings", new[] { "SubcategoryId" });
             DropIndex("dbo.Earnings", new[] { "CategoryId" });
             DropIndex("dbo.Earnings", new[] { "BankAccountId" });

@@ -10,7 +10,6 @@ namespace HomeBudget.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            ContextKey = "HomeBudget.Models.ApplicationDbContext";
         }
 
         protected override void Seed(HomeBudget.Models.ApplicationDbContext context)
