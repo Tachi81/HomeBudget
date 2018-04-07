@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using HomeBudget.Models;
 
 namespace HomeBudget.DAL.Interfaces
 {

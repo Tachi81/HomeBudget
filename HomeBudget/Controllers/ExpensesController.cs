@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Linq;
+﻿using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using HomeBudget.Business_Logic;
 using HomeBudget.DAL.Interfaces;
@@ -19,9 +14,7 @@ namespace HomeBudget.Controllers
         private readonly IBankAccountRepository _bankAccountRepository;
         private readonly ICategoriesRepository _categoriesRepository;
         private readonly ISubCategoriesRepository _subCategoriesRepository;
-      
         private readonly IBankAccountLogic _bankAccountLogic;
-
 
         public ExpensesController(IExpensesRepository expenseRepository, IBankAccountRepository bankAccountRepository,
             ICategoriesRepository categoriesRepository, IBankAccountLogic bankAccountLogic,
