@@ -211,7 +211,9 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Business_Logic\AuthorizationLogic.cs" />
     <Compile Include="Business_Logic\BankAccountLogic.cs" />
+    <Compile Include="Controllers\EarningCategoriesController.cs" />
     <Compile Include="Controllers\EarningsController.cs" />
+    <Compile Include="Controllers\EarningSubCategoriesController.cs" />
     <Compile Include="DAL\Interfaces\IBankAccountLogic.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BankAccountsController.cs" />
@@ -237,26 +239,31 @@
     <Compile Include="DAL\Interfaces\IEarningCategoriesRepository.cs" />
     <Compile Include="DAL\Interfaces\IExpenseSubCategoriesRepository.cs" />
     <Compile Include="DAL\Interfaces\IEarningSubCategoriesRepository.cs" />
-    <Compile Include="DAL\Repositories\SubCategoriesRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804071939544_BuildDB.cs" />
-    <Compile Include="Migrations\201804071939544_BuildDB.Designer.cs">
-      <DependentUpon>201804071939544_BuildDB.cs</DependentUpon>
+    <Compile Include="Migrations\201804072141582_BuildDB.cs" />
+    <Compile Include="Migrations\201804072141582_BuildDB.Designer.cs">
+      <DependentUpon>201804072141582_BuildDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804072249426_2.cs" />
+    <Compile Include="Migrations\201804072249426_2.Designer.cs">
+      <DependentUpon>201804072249426_2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804072255173_3.cs" />
+    <Compile Include="Migrations\201804072255173_3.Designer.cs">
+      <DependentUpon>201804072255173_3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BankAccount.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Earning.cs" />
     <Compile Include="Models\EarningCategory.cs" />
     <Compile Include="Models\EarningSubCategory.cs" />
     <Compile Include="Models\Expense.cs" />
     <Compile Include="DAL\Interfaces\IMoveMoney.cs" />
     <Compile Include="Models\ExpenseCategory.cs" />
-    <Compile Include="Models\ExpenseSubcategory.cs" />
-    <Compile Include="Models\SubCategory.cs" />
+    <Compile Include="Models\ExpenseSubCategory.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -342,6 +349,16 @@
     <Content Include="Views\Earnings\Details.cshtml" />
     <Content Include="Views\Earnings\Edit.cshtml" />
     <Content Include="Views\Earnings\Index.cshtml" />
+    <Content Include="Views\EarningCategories\Create.cshtml" />
+    <Content Include="Views\EarningCategories\Delete.cshtml" />
+    <Content Include="Views\EarningCategories\Details.cshtml" />
+    <Content Include="Views\EarningCategories\Edit.cshtml" />
+    <Content Include="Views\EarningCategories\Index.cshtml" />
+    <Content Include="Views\EarningSubCategories\Create.cshtml" />
+    <Content Include="Views\EarningSubCategories\Delete.cshtml" />
+    <Content Include="Views\EarningSubCategories\Details.cshtml" />
+    <Content Include="Views\EarningSubCategories\Edit.cshtml" />
+    <Content Include="Views\EarningSubCategories\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -360,8 +377,14 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804071939544_BuildDB.resx">
-      <DependentUpon>201804071939544_BuildDB.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804072141582_BuildDB.resx">
+      <DependentUpon>201804072141582_BuildDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804072249426_2.resx">
+      <DependentUpon>201804072249426_2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804072255173_3.resx">
+      <DependentUpon>201804072255173_3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

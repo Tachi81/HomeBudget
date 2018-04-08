@@ -30,14 +30,26 @@ namespace HomeBudget.Models
             return new ApplicationDbContext();
         }
 
-        public DbSet<Earning> Earnings { get; set; }
-
-        public DbSet<SubCategory> SubCategories { get; set; }
-
         public System.Data.Entity.DbSet<HomeBudget.Models.BankAccount> BankAccounts { get; set; }
-
         public System.Data.Entity.DbSet<HomeBudget.Models.Expense> Expenses { get; set; }
+        public DbSet<Earning> Earnings { get; set; }
+        public System.Data.Entity.DbSet<HomeBudget.Models.ExpenseCategory> ExpenseCategories { get; set; }
+        public System.Data.Entity.DbSet<HomeBudget.Models.EarningCategory> EarningCategories { get; set; }
 
-        public System.Data.Entity.DbSet<HomeBudget.Models.Category> Categories { get; set; }
+        public DbSet<ExpenseSubCategory> ExpenseSubCategories { get; set; }
+        public DbSet<EarningSubCategory> EarningSubCategories { get; set; }
+
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ExpenseCategory>().Property(expenseCategory => expenseCategory.CategoryName).IsRequired().HasMaxLength(50);
+            modelBuilder.Entity<ExpenseSubCategory>().Property(ex => ex.SubCategoryName).IsRequired();
+
+            modelBuilder.Entity<EarningCategory>().Property(expenseCategory => expenseCategory.CategoryName).IsRequired().HasMaxLength(50);
+            modelBuilder.Entity<EarningSubCategory>().Property(ex => ex.SubCategoryName).IsRequired();
+
+            base.OnModelCreating(modelBuilder);
+        }
+
     }
 }

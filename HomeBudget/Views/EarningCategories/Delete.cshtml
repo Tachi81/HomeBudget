@@ -1,30 +1,22 @@
-﻿@model HomeBudget.Models.ExpenseSubCategory
+﻿@model HomeBudget.Models.EarningCategory
 
 @{
-    ViewBag.Title = "ExpenseSubcategory";
+    ViewBag.Title = "Delete";
 }
 
 <h2>Delete</h2>
 
 <h3>Are you sure you want to delete this?</h3>
 <div>
-    <h4>SubCategory</h4>
+    <h4>EarningCategory</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.ExpenseCategory.CategoryName)
+            @Html.DisplayNameFor(model => model.CategoryName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ExpenseCategory.CategoryName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SubCategoryName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SubCategoryName)
+            @Html.DisplayFor(model => model.CategoryName)
         </dd>
 
     </dl>

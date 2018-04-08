@@ -1,10 +1,10 @@
-﻿@model IEnumerable<HomeBudget.Models.ExpenseSubCategory>
+﻿@model IEnumerable<HomeBudget.Models.EarningCategory>
 
 @{
-    ViewBag.Title = "SubCategory";
+    ViewBag.Title = "Index";
 }
 
-<h2>ExpenseSubcategories</h2>
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,10 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.ExpenseCategory.CategoryName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SubCategoryName)
+            @Html.DisplayNameFor(model => model.CategoryName)
         </th>
         <th></th>
     </tr>
@@ -23,12 +20,8 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.ExpenseCategory.CategoryName)
+            @Html.DisplayFor(modelItem => item.CategoryName)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SubCategoryName)
-        </td>
-
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |

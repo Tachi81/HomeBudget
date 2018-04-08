@@ -35,7 +35,7 @@ namespace HomeBudget.Controllers
         // GET: Earnings
         public ActionResult Index()
         {
-            var earnings = _earningsRepository.GetWhereWithIncludes(x => x.Id > 0, x => x.BankAccount, x => x.SubCategory, x => x.Category).ToList();
+            var earnings = _earningsRepository.GetWhereWithIncludes(x => x.Id > 0, x => x.BankAccount, x => x.EarningSubCategory, x => x.EarningCategory).ToList();
             return View(earnings);
         }
 
@@ -47,7 +47,7 @@ namespace HomeBudget.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Earning earning = _earningsRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.SubCategory, x => x.Category).FirstOrDefault();
+            Earning earning = _earningsRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.EarningSubCategory, x => x.EarningCategory).FirstOrDefault();
             if (earning == null)
             {
                 return HttpNotFound();
@@ -63,8 +63,8 @@ namespace HomeBudget.Controllers
             var subCategories = _subCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
 
             ViewBag.BankAccountId = new SelectList(bankAccounts, "Id", "AccountName");
-            ViewBag.CategoryId = new SelectList(categories, "Id", "CategoryName");
-            ViewBag.SubcategoryId = new SelectList(subCategories, "Id", "SubCategoryName");
+            ViewBag.EarningCategoryId = new SelectList(categories, "Id", "CategoryName");
+            ViewBag.EarningSubcategoryId = new SelectList(subCategories, "Id", "SubCategoryName");
             return View();
         }
 
@@ -79,7 +79,7 @@ namespace HomeBudget.Controllers
             {
                 _earningsRepository.Create(earning);
 
-                _bankAccountLogic.CalculateAccountBalance(earning.BankAccountId);
+                _bankAccountLogic.CalculateBalanceOfAllAccounts();
                 return RedirectToAction("Index");
             }
 
@@ -88,8 +88,8 @@ namespace HomeBudget.Controllers
             var subCategories = _subCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
 
             ViewBag.BankAccountId = new SelectList(bankAccounts, "Id", "AccountName");
-            ViewBag.CategoryId = new SelectList(categories, "Id", "CategoryName");
-            ViewBag.SubcategoryId = new SelectList(subCategories, "Id", "SubCategoryName");
+            ViewBag.EarningCategoryId = new SelectList(categories, "Id", "CategoryName");
+            ViewBag.EarningSubcategoryId = new SelectList(subCategories, "Id", "SubCategoryName");
             return View(earning);
         }
 
@@ -100,7 +100,7 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Earning earning = _earningsRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.SubCategory, x => x.Category).FirstOrDefault();
+            Earning earning = _earningsRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.EarningSubCategory, x => x.EarningCategory).FirstOrDefault();
             if (earning == null)
             {
                 return HttpNotFound();
@@ -111,8 +111,8 @@ namespace HomeBudget.Controllers
             var subCategories = _subCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
 
             ViewBag.BankAccountId = new SelectList(bankAccounts, "Id", "AccountName");
-            ViewBag.CategoryId = new SelectList(categories, "Id", "CategoryName");
-            ViewBag.SubcategoryId = new SelectList(subCategories, "Id", "SubCategoryName");
+            ViewBag.EarningCategoryId = new SelectList(categories, "Id", "CategoryName");
+            ViewBag.EarningSubcategoryId = new SelectList(subCategories, "Id", "SubCategoryName");
             return View(earning);
         }
 
@@ -126,7 +126,7 @@ namespace HomeBudget.Controllers
             if (ModelState.IsValid)
             {
                 _earningsRepository.Update(earning);
-                _bankAccountLogic.CalculateAccountBalance(earning.BankAccountId);
+                _bankAccountLogic.CalculateBalanceOfAllAccounts();
 
                 return RedirectToAction("Index");
             }
@@ -135,8 +135,8 @@ namespace HomeBudget.Controllers
             var subCategories = _subCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
 
             ViewBag.BankAccountId = new SelectList(bankAccounts, "Id", "AccountName");
-            ViewBag.CategoryId = new SelectList(categories, "Id", "CategoryName");
-            ViewBag.SubcategoryId = new SelectList(subCategories, "Id", "SubCategoryName");
+            ViewBag.EarningCategoryId = new SelectList(categories, "Id", "CategoryName");
+            ViewBag.EarningSubcategoryId = new SelectList(subCategories, "Id", "SubCategoryName");
             return View(earning);
         }
 
@@ -147,7 +147,7 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Earning earning = _earningsRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.SubCategory, x => x.Category).FirstOrDefault();
+            Earning earning = _earningsRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.EarningSubCategory, x => x.EarningCategory).FirstOrDefault();
             if (earning == null)
             {
                 return HttpNotFound();
@@ -160,9 +160,9 @@ namespace HomeBudget.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Earning earning = _earningsRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.SubCategory, x => x.Category).FirstOrDefault();
+            Earning earning = _earningsRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.EarningSubCategory, x => x.EarningCategory).FirstOrDefault();
             _earningsRepository.Delete(earning);
-            _bankAccountLogic.CalculateAccountBalance(earning.BankAccountId);
+            _bankAccountLogic.CalculateBalanceOfAllAccounts();
 
             return RedirectToAction("Index");
         }

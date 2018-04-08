@@ -14,7 +14,7 @@ namespace HomeBudget.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         InitialBalance = c.Double(nullable: false),
                         Balance = c.Double(nullable: false),
-                        AccountName = c.String(nullable: false),
+                        AccountName = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -25,41 +25,39 @@ namespace HomeBudget.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         Income = c.Double(nullable: false),
                         BankAccountId = c.Int(nullable: false),
-                        CategoryId = c.Int(nullable: false),
-                        SubcategoryId = c.Int(nullable: false),
+                        EarningCategoryId = c.Int(nullable: false),
+                        EarningSubCategoryId = c.Int(nullable: false),
                         DateTime = c.DateTime(nullable: false),
                         Note = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.BankAccounts", t => t.BankAccountId, cascadeDelete: true)
-                .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: true)
-                .ForeignKey("dbo.SubCategories", t => t.SubcategoryId, cascadeDelete: true)
+                .ForeignKey("dbo.EarningCategories", t => t.EarningCategoryId, cascadeDelete: true)
+                .ForeignKey("dbo.EarningSubCategories", t => t.EarningSubCategoryId, cascadeDelete: true)
                 .Index(t => t.BankAccountId)
-                .Index(t => t.CategoryId)
-                .Index(t => t.SubcategoryId);
+                .Index(t => t.EarningCategoryId)
+                .Index(t => t.EarningSubCategoryId);
             
             CreateTable(
-                "dbo.Categories",
+                "dbo.EarningCategories",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        CategoryName = c.String(nullable: false),
-                        Discriminator = c.String(nullable: false, maxLength: 128),
+                        CategoryName = c.String(nullable: false, maxLength: 50),
                     })
                 .PrimaryKey(t => t.Id);
             
             CreateTable(
-                "dbo.SubCategories",
+                "dbo.EarningSubCategories",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
                         SubCategoryName = c.String(nullable: false),
-                        CategoryId = c.Int(nullable: false),
-                        Discriminator = c.String(nullable: false, maxLength: 128),
+                        EarningCategoryId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: false)
-                .Index(t => t.CategoryId);
+                .ForeignKey("dbo.EarningCategories", t => t.EarningCategoryId, cascadeDelete: false)
+                .Index(t => t.EarningCategoryId);
             
             CreateTable(
                 "dbo.Expenses",
@@ -68,18 +66,39 @@ namespace HomeBudget.Migrations
                         Id = c.Int(nullable: false, identity: true),
                         Cost = c.Double(nullable: false),
                         BankAccountId = c.Int(nullable: false),
-                        CategoryId = c.Int(nullable: false),
-                        SubcategoryId = c.Int(nullable: false),
+                        ExpenseCategoryId = c.Int(nullable: false),
+                        ExpenseSubcategoryId = c.Int(nullable: false),
                         DateTime = c.DateTime(nullable: false),
                         Note = c.String(),
                     })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.BankAccounts", t => t.BankAccountId, cascadeDelete: true)
-                .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: true)
-                .ForeignKey("dbo.SubCategories", t => t.SubcategoryId, cascadeDelete: true)
+                .ForeignKey("dbo.ExpenseCategories", t => t.ExpenseCategoryId, cascadeDelete: true)
+                .ForeignKey("dbo.ExpenseSubCategories", t => t.ExpenseSubcategoryId, cascadeDelete: true)
                 .Index(t => t.BankAccountId)
-                .Index(t => t.CategoryId)
-                .Index(t => t.SubcategoryId);
+                .Index(t => t.ExpenseCategoryId)
+                .Index(t => t.ExpenseSubcategoryId);
+            
+            CreateTable(
+                "dbo.ExpenseCategories",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        CategoryName = c.String(nullable: false, maxLength: 50),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.ExpenseSubCategories",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        SubCategoryName = c.String(nullable: false),
+                        ExpenseCategoryId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.ExpenseCategories", t => t.ExpenseCategoryId, cascadeDelete: false)
+                .Index(t => t.ExpenseCategoryId);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -157,12 +176,13 @@ namespace HomeBudget.Migrations
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.Expenses", "SubcategoryId", "dbo.SubCategories");
-            DropForeignKey("dbo.Expenses", "CategoryId", "dbo.Categories");
+            DropForeignKey("dbo.Expenses", "ExpenseSubcategoryId", "dbo.ExpenseSubCategories");
+            DropForeignKey("dbo.Expenses", "ExpenseCategoryId", "dbo.ExpenseCategories");
+            DropForeignKey("dbo.ExpenseSubCategories", "ExpenseCategoryId", "dbo.ExpenseCategories");
             DropForeignKey("dbo.Expenses", "BankAccountId", "dbo.BankAccounts");
-            DropForeignKey("dbo.Earnings", "SubcategoryId", "dbo.SubCategories");
-            DropForeignKey("dbo.Earnings", "CategoryId", "dbo.Categories");
-            DropForeignKey("dbo.SubCategories", "CategoryId", "dbo.Categories");
+            DropForeignKey("dbo.Earnings", "EarningSubCategoryId", "dbo.EarningSubCategories");
+            DropForeignKey("dbo.Earnings", "EarningCategoryId", "dbo.EarningCategories");
+            DropForeignKey("dbo.EarningSubCategories", "EarningCategoryId", "dbo.EarningCategories");
             DropForeignKey("dbo.Earnings", "BankAccountId", "dbo.BankAccounts");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
@@ -170,21 +190,24 @@ namespace HomeBudget.Migrations
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropIndex("dbo.Expenses", new[] { "SubcategoryId" });
-            DropIndex("dbo.Expenses", new[] { "CategoryId" });
+            DropIndex("dbo.ExpenseSubCategories", new[] { "ExpenseCategoryId" });
+            DropIndex("dbo.Expenses", new[] { "ExpenseSubcategoryId" });
+            DropIndex("dbo.Expenses", new[] { "ExpenseCategoryId" });
             DropIndex("dbo.Expenses", new[] { "BankAccountId" });
-            DropIndex("dbo.SubCategories", new[] { "CategoryId" });
-            DropIndex("dbo.Earnings", new[] { "SubcategoryId" });
-            DropIndex("dbo.Earnings", new[] { "CategoryId" });
+            DropIndex("dbo.EarningSubCategories", new[] { "EarningCategoryId" });
+            DropIndex("dbo.Earnings", new[] { "EarningSubCategoryId" });
+            DropIndex("dbo.Earnings", new[] { "EarningCategoryId" });
             DropIndex("dbo.Earnings", new[] { "BankAccountId" });
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
+            DropTable("dbo.ExpenseSubCategories");
+            DropTable("dbo.ExpenseCategories");
             DropTable("dbo.Expenses");
-            DropTable("dbo.SubCategories");
-            DropTable("dbo.Categories");
+            DropTable("dbo.EarningSubCategories");
+            DropTable("dbo.EarningCategories");
             DropTable("dbo.Earnings");
             DropTable("dbo.BankAccounts");
         }

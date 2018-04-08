@@ -12,7 +12,7 @@ namespace HomeBudget.Controllers
     {
         private readonly IExpensesRepository _expenseRepository;
         private readonly IBankAccountRepository _bankAccountRepository;
-        private readonly IExpenseCategoriesRepository _categoriesRepository;
+        private readonly IExpenseCategoriesRepository _expenseCategoriesRepository;
         private readonly IExpenseSubCategoriesRepository _subCategoriesRepository;
         private readonly IBankAccountLogic _bankAccountLogic;
 
@@ -22,7 +22,7 @@ namespace HomeBudget.Controllers
         {
             _expenseRepository = expenseRepository;
             _bankAccountRepository = bankAccountRepository;
-            _categoriesRepository = categoriesRepository;
+            _expenseCategoriesRepository = categoriesRepository;
             _subCategoriesRepository = subCategoriesRepository;
             _bankAccountLogic = bankAccountLogic;
         }
@@ -30,7 +30,7 @@ namespace HomeBudget.Controllers
         // GET: Expenses
         public ActionResult Index()
         {
-            var expenses = _expenseRepository.GetWhereWithIncludes(e => e.Id > 0, x=>x.BankAccount, x=>x.SubCategory, x=>x.Category).ToList();
+            var expenses = _expenseRepository.GetWhereWithIncludes(e => e.Id > 0, x=>x.BankAccount, x=>x.ExpenseSubCategory, x=>x.ExpenseCategory).ToList();
             return View(expenses);
         }
 
@@ -42,7 +42,7 @@ namespace HomeBudget.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            Expense expense = _expenseRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.SubCategory, x => x.Category).FirstOrDefault();
+            Expense expense = _expenseRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.ExpenseSubCategory, x => x.ExpenseCategory).FirstOrDefault();
             if (expense == null)
             {
                 return HttpNotFound();
@@ -54,12 +54,12 @@ namespace HomeBudget.Controllers
         public ActionResult Create()
         {
             var bankAccounts = _bankAccountRepository.GetWhere(x => x.Id > 0).ToList();
-            var categories = _categoriesRepository.GetWhere(x => x.Id > 0).ToList();
+            var categories = _expenseCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
             var subCategories = _subCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
 
             ViewBag.BankAccountId = new SelectList(bankAccounts, "Id", "AccountName");
-            ViewBag.CategoryId = new SelectList(categories, "Id", "CategoryName");
-            ViewBag.SubCategoryId = new SelectList(subCategories, "Id", "SubCategoryName");
+            ViewBag.ExpenseCategoryId = new SelectList(categories, "Id", "CategoryName");
+            ViewBag.ExpenseSubCategoryId = new SelectList(subCategories, "Id", "SubCategoryName");
             return View();
         }
 
@@ -74,17 +74,18 @@ namespace HomeBudget.Controllers
             {
                 _expenseRepository.Create(expense);
            
-                _bankAccountLogic.CalculateAccountBalance(expense.BankAccountId);
+                _bankAccountLogic.CalculateBalanceOfAllAccounts();
                 return RedirectToAction("Index");
             }
 
             var bankAccounts = _bankAccountRepository.GetWhere(x => x.Id > 0).ToList();
-            var categories = _categoriesRepository.GetWhere(x => x.Id > 0).ToList();
+            var categories = _expenseCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
             var subCategories = _subCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
 
+
             ViewBag.BankAccountId = new SelectList(bankAccounts, "Id", "AccountName");
-            ViewBag.CategoryId = new SelectList(categories, "Id", "CategoryName");
-            ViewBag.SubCategoryId = new SelectList(subCategories, "Id", "SubCategoryName");
+            ViewBag.ExpenseCategoryId = new SelectList(categories, "Id", "CategoryName");
+            ViewBag.ExpenseSubCategoryId = new SelectList(subCategories, "Id", "SubCategoryName");
 
             return View(expense);
         }
@@ -96,19 +97,19 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Expense expense = _expenseRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.SubCategory, x => x.Category).FirstOrDefault();
+            Expense expense = _expenseRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.ExpenseSubCategory, x => x.ExpenseCategory).FirstOrDefault();
             if (expense == null)
             {
                 return HttpNotFound();
             }
 
             var bankAccounts = _bankAccountRepository.GetWhere(x => x.Id > 0).ToList();
-            var categories = _categoriesRepository.GetWhere(x => x.Id > 0).ToList();
+            var categories = _expenseCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
             var subCategories = _subCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
 
             ViewBag.BankAccountId = new SelectList(bankAccounts, "Id", "AccountName");
-            ViewBag.CategoryId = new SelectList(categories, "Id", "CategoryName");
-            ViewBag.SubCategoryId = new SelectList(subCategories, "Id", "SubCategoryName");
+            ViewBag.ExpenseCategoryId = new SelectList(categories, "Id", "CategoryName");
+            ViewBag.ExpenseSubCategoryId = new SelectList(subCategories, "Id", "SubCategoryName");
 
             return View(expense);
         }
@@ -123,17 +124,17 @@ namespace HomeBudget.Controllers
             if (ModelState.IsValid)
             {
                 _expenseRepository.Update(expense);
-                _bankAccountLogic.CalculateAccountBalance(expense.BankAccountId);
+                _bankAccountLogic.CalculateBalanceOfAllAccounts();
                 return RedirectToAction("Index");
             }
 
             var bankAccounts = _bankAccountRepository.GetWhere(x => x.Id > 0).ToList();
-            var categories = _categoriesRepository.GetWhere(x => x.Id > 0).ToList();
+            var categories = _expenseCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
             var subCategories = _subCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
 
             ViewBag.BankAccountId = new SelectList(bankAccounts, "Id", "AccountName");
-            ViewBag.CategoryId = new SelectList(categories, "Id", "CategoryName");
-            ViewBag.SubCategoryId = new SelectList(subCategories, "Id", "SubCategoryName");
+            ViewBag.ExpenseCategoryId = new SelectList(categories, "Id", "CategoryName");
+            ViewBag.ExpenseSubCategoryId = new SelectList(subCategories, "Id", "SubCategoryName");
             return View(expense);
         }
 
@@ -144,7 +145,7 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Expense expense = _expenseRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.SubCategory, x => x.Category).FirstOrDefault();
+            Expense expense = _expenseRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.ExpenseSubCategory, x => x.ExpenseCategory).FirstOrDefault();
             if (expense == null)
             {
                 return HttpNotFound();
@@ -157,14 +158,12 @@ namespace HomeBudget.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Expense expense = _expenseRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.SubCategory, x => x.Category).FirstOrDefault();
+            Expense expense = _expenseRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.ExpenseSubCategory, x => x.ExpenseCategory).FirstOrDefault();
             _expenseRepository.Delete(expense);
-            _bankAccountLogic.CalculateAccountBalance(expense.BankAccountId);
+            _bankAccountLogic.CalculateBalanceOfAllAccounts();
 
 
             return RedirectToAction("Index");
         }
-
-
     }
 }

@@ -2,6 +2,6 @@
 {
     public interface IBankAccountLogic
     {
-        void CalculateAccountBalance(int bankAccountId);
+        void CalculateBalanceOfAllAccounts();
     }
 }

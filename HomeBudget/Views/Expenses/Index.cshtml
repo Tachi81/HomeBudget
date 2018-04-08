@@ -18,10 +18,10 @@
             @Html.DisplayNameFor(model => model.Cost)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Category.CategoryName)
+            @Html.DisplayNameFor(model => model.ExpenseCategory.CategoryName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SubCategory.SubCategoryName)
+            @Html.DisplayNameFor(model => model.ExpenseSubCategory.SubCategoryName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.DateTime)
@@ -41,10 +41,10 @@
             @Html.DisplayFor(modelItem => item.Cost)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Category.CategoryName)
+            @Html.DisplayFor(modelItem => item.ExpenseCategory.CategoryName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.SubCategory.SubCategoryName)
+            @Html.DisplayFor(modelItem => item.ExpenseSubCategory.SubCategoryName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DateTime.DayOfWeek)

@@ -10,8 +10,8 @@ namespace HomeBudget.Models
         public string AccountName { get; set; }
        
         
-        public virtual List<Expense> Expenses { get; set; }
-        public virtual List<Earning> Earnings { get; set; }
+        public virtual ICollection<Expense> Expenses { get; set; }
+        public virtual ICollection<Earning> Earnings { get; set; }
 
     }
 }
