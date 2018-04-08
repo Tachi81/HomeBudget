@@ -1,4 +1,4 @@
-﻿@model HomeBudget.Models.BankAccount
+﻿@model HomeBudget.ViewModels.BankAccountVM
 
 @{
     ViewBag.Title = "BankAccount";
@@ -12,19 +12,19 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Balance)
+            @Html.DisplayNameFor(model => model.BankAccount.Balance)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Balance)
+            @Html.DisplayFor(model => model.BankAccount.Balance)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.AccountName)
+            @Html.DisplayNameFor(model => model.BankAccount.AccountName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AccountName)
+            @Html.DisplayFor(model => model.BankAccount.AccountName)
         </dd>
 
        

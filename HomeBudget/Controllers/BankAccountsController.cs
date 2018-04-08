@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using HomeBudget.Business_Logic;
 using HomeBudget.DAL.Interfaces;
 using HomeBudget.Models;
+using HomeBudget.ViewModels;
 
 namespace HomeBudget.Controllers
 {
@@ -22,7 +23,9 @@ namespace HomeBudget.Controllers
         // GET: BankAccounts
         public ActionResult Index()
         {
-            return View("Index", _bankAccountRepository.GetWhere(x => x.Id > 0));
+            BankAccountVM bankAccountVm = new BankAccountVM
+                { BankAccountsList = _bankAccountRepository.GetWhere(x => x.Id > 0)};
+            return View("Index", bankAccountVm);
         }
 
         // GET: BankAccounts/Details/5
@@ -33,12 +36,11 @@ namespace HomeBudget.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var bankAccount = _bankAccountRepository.GetWhere(x => x.Id == id).FirstOrDefault();
-            if (bankAccount == null)
+            var bankAccountVm = new BankAccountVM
             {
-                return HttpNotFound();
-            }
-            return View(bankAccount);
+                BankAccount = _bankAccountRepository.GetWhere(x => x.Id == id).FirstOrDefault()
+            };
+            return View(bankAccountVm);
         }
 
         // GET: BankAccounts/Create
@@ -52,16 +54,16 @@ namespace HomeBudget.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(BankAccount bankAccount)
+        public ActionResult Create(BankAccountVM bankAccountVM)
         {
             if (ModelState.IsValid)
             {
-                _bankAccountRepository.Create(bankAccount);
+                _bankAccountRepository.Create(bankAccountVM.BankAccount);
                 _bankAccountLogic.CalculateBalanceOfAllAccounts();
                 return RedirectToAction("Index");
             }
 
-            return View(bankAccount);
+            return View(bankAccountVM);
         }
 
         // GET: BankAccounts/Edit/5
@@ -71,12 +73,12 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var bankAccount = _bankAccountRepository.GetWhere(x => x.Id == id).FirstOrDefault();
-            if (bankAccount == null)
+
+            var bankAccountVm = new BankAccountVM
             {
-                return HttpNotFound();
-            }
-            return View(bankAccount);
+                BankAccount = _bankAccountRepository.GetWhere(x => x.Id == id).FirstOrDefault()
+            };
+            return View(bankAccountVm);
         }
 
         // POST: BankAccounts/Edit/5
@@ -84,15 +86,15 @@ namespace HomeBudget.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(BankAccount bankAccount)
+        public ActionResult Edit(BankAccountVM bankAccountVm)
         {
             if (ModelState.IsValid)
             {
-                _bankAccountRepository.Update(bankAccount);
+                _bankAccountRepository.Update(bankAccountVm.BankAccount);
                 _bankAccountLogic.CalculateBalanceOfAllAccounts();
                 return RedirectToAction("Index");
             }
-            return View(bankAccount);
+            return View(bankAccountVm);
         }
 
         // GET: BankAccounts/Delete/5
@@ -102,12 +104,11 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var bankAccount = _bankAccountRepository.GetWhere(x => x.Id == id).FirstOrDefault();
-            if (bankAccount == null)
+            var bankAccountVm = new BankAccountVM
             {
-                return HttpNotFound();
-            }
-            return View(bankAccount);
+                BankAccount = _bankAccountRepository.GetWhere(x => x.Id == id).FirstOrDefault()
+            };
+            return View(bankAccountVm);
         }
 
         // POST: BankAccounts/Delete/5
@@ -115,8 +116,11 @@ namespace HomeBudget.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var bankAccount = _bankAccountRepository.GetWhere(x => x.Id == id).FirstOrDefault();
-            _bankAccountRepository.Delete(bankAccount);
+            var bankAccountVm = new BankAccountVM
+            {
+                BankAccount = _bankAccountRepository.GetWhere(x => x.Id == id).FirstOrDefault()
+            };
+            _bankAccountRepository.Delete(bankAccountVm.BankAccount);
             return RedirectToAction("Index");
         }
 
