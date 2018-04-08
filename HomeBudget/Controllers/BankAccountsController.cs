@@ -23,7 +23,7 @@ namespace HomeBudget.Controllers
         // GET: BankAccounts
         public ActionResult Index()
         {
-            BankAccountVM bankAccountVm = new BankAccountVM
+            BankAccountViewModel bankAccountVm = new BankAccountViewModel
                 { BankAccountsList = _bankAccountRepository.GetWhere(x => x.Id > 0)};
             return View("Index", bankAccountVm);
         }
@@ -36,7 +36,7 @@ namespace HomeBudget.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var bankAccountVm = new BankAccountVM
+            var bankAccountVm = new BankAccountViewModel
             {
                 BankAccount = _bankAccountRepository.GetWhere(x => x.Id == id).FirstOrDefault()
             };
@@ -54,7 +54,7 @@ namespace HomeBudget.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(BankAccountVM bankAccountVM)
+        public ActionResult Create(BankAccountViewModel bankAccountVM)
         {
             if (ModelState.IsValid)
             {
@@ -74,7 +74,7 @@ namespace HomeBudget.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var bankAccountVm = new BankAccountVM
+            var bankAccountVm = new BankAccountViewModel
             {
                 BankAccount = _bankAccountRepository.GetWhere(x => x.Id == id).FirstOrDefault()
             };
@@ -86,7 +86,7 @@ namespace HomeBudget.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(BankAccountVM bankAccountVm)
+        public ActionResult Edit(BankAccountViewModel bankAccountVm)
         {
             if (ModelState.IsValid)
             {
@@ -104,7 +104,7 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var bankAccountVm = new BankAccountVM
+            var bankAccountVm = new BankAccountViewModel
             {
                 BankAccount = _bankAccountRepository.GetWhere(x => x.Id == id).FirstOrDefault()
             };
@@ -116,7 +116,7 @@ namespace HomeBudget.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            var bankAccountVm = new BankAccountVM
+            var bankAccountVm = new BankAccountViewModel
             {
                 BankAccount = _bankAccountRepository.GetWhere(x => x.Id == id).FirstOrDefault()
             };
