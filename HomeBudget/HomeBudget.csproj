@@ -209,7 +209,6 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Business_Logic\AuthorizationLogic.cs" />
     <Compile Include="Business_Logic\BankAccountLogic.cs" />
     <Compile Include="Controllers\EarningCategoriesController.cs" />
     <Compile Include="Controllers\EarningsController.cs" />
