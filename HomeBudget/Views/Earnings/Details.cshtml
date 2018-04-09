@@ -1,4 +1,4 @@
-﻿@model HomeBudget.Models.Earning
+﻿@model HomeBudget.ViewModels.EarningViewModel
 
 @{
     ViewBag.Title = "Earning";
@@ -11,56 +11,56 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.BankAccount.AccountName)
+            @Html.DisplayNameFor(model => model.Earning.BankAccount.AccountName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.BankAccount.AccountName)
+            @Html.DisplayFor(model => model.Earning.BankAccount.AccountName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.EarningCategory.CategoryName)
+            @Html.DisplayNameFor(model => model.Earning.EarningCategory.CategoryName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EarningCategory.CategoryName)
+            @Html.DisplayFor(model => model.Earning.EarningCategory.CategoryName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.EarningSubCategory.SubCategoryName)
+            @Html.DisplayNameFor(model => model.Earning.EarningSubCategory.SubCategoryName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.EarningSubCategory.SubCategoryName)
+            @Html.DisplayFor(model => model.Earning.EarningSubCategory.SubCategoryName)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Income)
+            @Html.DisplayNameFor(model => model.Earning.Income)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Income)
+            @Html.DisplayFor(model => model.Earning.Income)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DateTime)
+            @Html.DisplayNameFor(model => model.Earning.DateTime)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DateTime)
+            @Html.DisplayFor(model => model.Earning.DateTime)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Note)
+            @Html.DisplayNameFor(model => model.Earning.Note)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Note)
+            @Html.DisplayFor(model => model.Earning.Note)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Earning.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>
