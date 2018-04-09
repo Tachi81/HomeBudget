@@ -159,8 +159,8 @@ namespace HomeBudget.Controllers
             var subCategories = _subCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
 
             earningVm.SelectListOfBankAccounts = new SelectList(bankAccounts, "Id", "AccountName");
-            earningVm.SelectListOfExpenseCategories = new SelectList(categories, "Id", "CategoryName");
-            earningVm.SelectListOfExpenseSubCategories = new SelectList(subCategories, "Id", "SubCategoryName");
+            earningVm.SelectListOfEarningCategories = new SelectList(categories, "Id", "CategoryName");
+            earningVm.SelectListOfEarningSubCategories = new SelectList(subCategories, "Id", "SubCategoryName");
             return earningVm;
         }
     }

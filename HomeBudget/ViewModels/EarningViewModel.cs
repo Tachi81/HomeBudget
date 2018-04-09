@@ -13,7 +13,7 @@ namespace HomeBudget.ViewModels
         public List<Earning> ListOfEarnings{ get; set; }
 
         public IEnumerable<SelectListItem> SelectListOfBankAccounts { get; set; }
-        public IEnumerable<SelectListItem> SelectListOfExpenseCategories { get; set; }
-        public IEnumerable<SelectListItem> SelectListOfExpenseSubCategories { get; set; }
+        public IEnumerable<SelectListItem> SelectListOfEarningCategories { get; set; }
+        public IEnumerable<SelectListItem> SelectListOfEarningSubCategories { get; set; }
     }
 }
