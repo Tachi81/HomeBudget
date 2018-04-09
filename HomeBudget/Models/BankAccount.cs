@@ -12,6 +12,7 @@ namespace HomeBudget.Models
         
         public virtual ICollection<Expense> Expenses { get; set; }
         public virtual ICollection<Earning> Earnings { get; set; }
+        public virtual ICollection<Transfer> Transfers { get; set; }
 
     }
 }
