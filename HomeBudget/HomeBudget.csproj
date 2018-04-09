@@ -242,21 +242,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804072141582_BuildDB.cs" />
-    <Compile Include="Migrations\201804072141582_BuildDB.Designer.cs">
-      <DependentUpon>201804072141582_BuildDB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804072249426_2.cs" />
-    <Compile Include="Migrations\201804072249426_2.Designer.cs">
-      <DependentUpon>201804072249426_2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804072255173_3.cs" />
-    <Compile Include="Migrations\201804072255173_3.Designer.cs">
-      <DependentUpon>201804072255173_3.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804091843510_AddedTransfer.cs" />
-    <Compile Include="Migrations\201804091843510_AddedTransfer.Designer.cs">
-      <DependentUpon>201804091843510_AddedTransfer.cs</DependentUpon>
+    <Compile Include="Migrations\201804092313141_CreateDB.cs" />
+    <Compile Include="Migrations\201804092313141_CreateDB.Designer.cs">
+      <DependentUpon>201804092313141_CreateDB.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -390,17 +378,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804072141582_BuildDB.resx">
-      <DependentUpon>201804072141582_BuildDB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804072249426_2.resx">
-      <DependentUpon>201804072249426_2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804072255173_3.resx">
-      <DependentUpon>201804072255173_3.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804091843510_AddedTransfer.resx">
-      <DependentUpon>201804091843510_AddedTransfer.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804092313141_CreateDB.resx">
+      <DependentUpon>201804092313141_CreateDB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

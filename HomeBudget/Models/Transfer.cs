@@ -16,8 +16,8 @@ namespace HomeBudget.Models
         public DateTime DateTime { get; set; }
         public string Note { get; set; }
 
-        public  virtual ICollection<BankAccount>  SourceBankAccounts { get; set; }
-        public virtual ICollection<BankAccount> TargetBankAccounts { get; set; }
+        public BankAccount SourceBankAccounts { get; set; }
+        public BankAccount TargetBankAccounts { get; set; }
 
     }
 }

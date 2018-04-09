@@ -7,13 +7,13 @@ namespace HomeBudget.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class BuildDB : IMigrationMetadata
+    public sealed partial class CreateDB : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(BuildDB));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateDB));
         
         string IMigrationMetadata.Id
         {
-            get { return "201804072141582_BuildDB"; }
+            get { return "201804092313141_CreateDB"; }
         }
         
         string IMigrationMetadata.Source
