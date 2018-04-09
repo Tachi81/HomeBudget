@@ -1,4 +1,4 @@
-﻿@model IEnumerable<HomeBudget.Models.Expense>
+﻿@model HomeBudget.ViewModels.ExpenseViewModel
 
 @{
     ViewBag.Title = "Expenses";
@@ -12,28 +12,28 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.BankAccount.AccountName)
+            @Html.DisplayNameFor(model => model.Expense.BankAccount.AccountName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Cost)
+            @Html.DisplayNameFor(model => model.Expense.Cost)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ExpenseCategory.CategoryName)
+            @Html.DisplayNameFor(model => model.Expense.ExpenseCategory.CategoryName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ExpenseSubCategory.SubCategoryName)
+            @Html.DisplayNameFor(model => model.Expense.ExpenseSubCategory.SubCategoryName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DateTime)
+            @Html.DisplayNameFor(model => model.Expense.DateTime)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Note)
+            @Html.DisplayNameFor(model => model.Expense.Note)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
+@foreach (var item in Model.ListOfExpenses) {
+    <tr>/
         <td>
             @Html.DisplayFor(modelItem => item.BankAccount.AccountName)
         </td>
