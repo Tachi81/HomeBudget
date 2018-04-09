@@ -5,38 +5,36 @@ using HomeBudget.Business_Logic;
 using HomeBudget.DAL.Interfaces;
 using HomeBudget.DAL.Repositories;
 using HomeBudget.Models;
+using HomeBudget.ViewModels;
 
 namespace HomeBudget.Controllers
 {
     public class EarningsController : Controller
     {
-     
+
         private readonly IBankAccountRepository _bankAccountRepository;
         private readonly IEarningCategoriesRepository _categoriesRepository;
         private readonly IEarningSubCategoriesRepository _subCategoriesRepository;
         private readonly IBankAccountLogic _bankAccountLogic;
         private readonly IEarningsRepository _earningsRepository;
 
-
-
-
         public EarningsController(IBankAccountRepository bankAccountRepository,
             IEarningCategoriesRepository categoriesRepository, IBankAccountLogic bankAccountLogic, IEarningsRepository earningsRepository,
             IEarningSubCategoriesRepository subCategoriesRepository)
         {
-           
             _bankAccountRepository = bankAccountRepository;
             _categoriesRepository = categoriesRepository;
             _subCategoriesRepository = subCategoriesRepository;
             _bankAccountLogic = bankAccountLogic;
             _earningsRepository = earningsRepository;
         }
-        
+
         // GET: Earnings
         public ActionResult Index()
         {
-            var earnings = _earningsRepository.GetWhereWithIncludes(x => x.Id > 0, x => x.BankAccount, x => x.EarningSubCategory, x => x.EarningCategory).ToList();
-            return View(earnings);
+            var earningVm = new EarningViewModel();
+            earningVm.ListOfEarnings = _earningsRepository.GetWhereWithIncludes(x => x.Id > 0, x => x.BankAccount, x => x.EarningSubCategory, x => x.EarningCategory).ToList();
+            return View(earningVm);
         }
 
         // GET: Earnings/Details/5
@@ -46,26 +44,20 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            Earning earning = _earningsRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.EarningSubCategory, x => x.EarningCategory).FirstOrDefault();
-            if (earning == null)
+            var earningVm = new EarningViewModel();
+            earningVm.Earning = _earningsRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.EarningSubCategory, x => x.EarningCategory).FirstOrDefault();
+            if (earningVm.Earning == null)
             {
                 return HttpNotFound();
             }
-            return View(earning);
+            return View(earningVm);
         }
 
         // GET: Earnings/Create
         public ActionResult Create()
         {
-            var bankAccounts = _bankAccountRepository.GetWhere(x => x.Id > 0).ToList();
-            var categories = _categoriesRepository.GetWhere(x => x.Id > 0).ToList();
-            var subCategories = _subCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
-
-            ViewBag.BankAccountId = new SelectList(bankAccounts, "Id", "AccountName");
-            ViewBag.EarningCategoryId = new SelectList(categories, "Id", "CategoryName");
-            ViewBag.EarningSubcategoryId = new SelectList(subCategories, "Id", "SubCategoryName");
-            return View();
+            EarningViewModel earningVm = CreateVmWithLists();
+            return View(earningVm);
         }
 
         // POST: Earnings/Create
@@ -73,24 +65,19 @@ namespace HomeBudget.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Earning earning)
+        public ActionResult Create(EarningViewModel earningVm)
         {
             if (ModelState.IsValid)
             {
-                _earningsRepository.Create(earning);
+                _earningsRepository.Create(earningVm.Earning);
 
                 _bankAccountLogic.CalculateBalanceOfAllAccounts();
                 return RedirectToAction("Index");
             }
 
-            var bankAccounts = _bankAccountRepository.GetWhere(x => x.Id > 0).ToList();
-            var categories = _categoriesRepository.GetWhere(x => x.Id > 0).ToList();
-            var subCategories = _subCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
+            earningVm = CreateVmWithLists();
 
-            ViewBag.BankAccountId = new SelectList(bankAccounts, "Id", "AccountName");
-            ViewBag.EarningCategoryId = new SelectList(categories, "Id", "CategoryName");
-            ViewBag.EarningSubcategoryId = new SelectList(subCategories, "Id", "SubCategoryName");
-            return View(earning);
+            return View(earningVm);
         }
 
         // GET: Earnings/Edit/5
@@ -100,20 +87,13 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Earning earning = _earningsRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.EarningSubCategory, x => x.EarningCategory).FirstOrDefault();
-            if (earning == null)
+            var earningVm = CreateVmWithLists();
+            earningVm.Earning = _earningsRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.EarningSubCategory, x => x.EarningCategory).FirstOrDefault();
+            if (earningVm.Earning == null)
             {
                 return HttpNotFound();
             }
-
-            var bankAccounts = _bankAccountRepository.GetWhere(x => x.Id > 0).ToList();
-            var categories = _categoriesRepository.GetWhere(x => x.Id > 0).ToList();
-            var subCategories = _subCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
-
-            ViewBag.BankAccountId = new SelectList(bankAccounts, "Id", "AccountName");
-            ViewBag.EarningCategoryId = new SelectList(categories, "Id", "CategoryName");
-            ViewBag.EarningSubcategoryId = new SelectList(subCategories, "Id", "SubCategoryName");
-            return View(earning);
+            return View(earningVm);
         }
 
         // POST: Earnings/Edit/5
@@ -121,23 +101,17 @@ namespace HomeBudget.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Earning earning)
+        public ActionResult Edit(EarningViewModel earningVm)
         {
             if (ModelState.IsValid)
             {
-                _earningsRepository.Update(earning);
+                _earningsRepository.Update(earningVm.Earning);
                 _bankAccountLogic.CalculateBalanceOfAllAccounts();
 
                 return RedirectToAction("Index");
             }
-            var bankAccounts = _bankAccountRepository.GetWhere(x => x.Id > 0).ToList();
-            var categories = _categoriesRepository.GetWhere(x => x.Id > 0).ToList();
-            var subCategories = _subCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
-
-            ViewBag.BankAccountId = new SelectList(bankAccounts, "Id", "AccountName");
-            ViewBag.EarningCategoryId = new SelectList(categories, "Id", "CategoryName");
-            ViewBag.EarningSubcategoryId = new SelectList(subCategories, "Id", "SubCategoryName");
-            return View(earning);
+            earningVm = CreateVmWithLists();
+            return View(earningVm);
         }
 
         // GET: Earnings/Delete/5
@@ -147,12 +121,14 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Earning earning = _earningsRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.EarningSubCategory, x => x.EarningCategory).FirstOrDefault();
-            if (earning == null)
+
+            var earningVm = new EarningViewModel();
+            earningVm.Earning = _earningsRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.EarningSubCategory, x => x.EarningCategory).FirstOrDefault();
+            if (earningVm.Earning == null)
             {
                 return HttpNotFound();
             }
-            return View(earning);
+            return View(earningVm);
         }
 
         // POST: Earnings/Delete/5
@@ -160,13 +136,32 @@ namespace HomeBudget.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Earning earning = _earningsRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.EarningSubCategory, x => x.EarningCategory).FirstOrDefault();
-            _earningsRepository.Delete(earning);
+            var earningVm = new EarningViewModel();
+            earningVm.Earning = _earningsRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.EarningSubCategory, x => x.EarningCategory).FirstOrDefault();
+            if (earningVm.Earning == null)
+            {
+                return HttpNotFound();
+            }
+            _earningsRepository.Delete(earningVm.Earning);
             _bankAccountLogic.CalculateBalanceOfAllAccounts();
 
             return RedirectToAction("Index");
         }
 
-       
+
+
+        private EarningViewModel CreateVmWithLists()
+        {
+            var earningVm = new EarningViewModel();
+
+            var bankAccounts = _bankAccountRepository.GetWhere(x => x.Id > 0).ToList();
+            var categories = _categoriesRepository.GetWhere(x => x.Id > 0).ToList();
+            var subCategories = _subCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
+
+            earningVm.SelectListOfBankAccounts = new SelectList(bankAccounts, "Id", "AccountName");
+            earningVm.SelectListOfExpenseCategories = new SelectList(categories, "Id", "CategoryName");
+            earningVm.SelectListOfExpenseSubCategories = new SelectList(subCategories, "Id", "SubCategoryName");
+            return earningVm;
+        }
     }
 }
