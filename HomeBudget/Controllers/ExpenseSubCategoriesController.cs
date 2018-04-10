@@ -20,7 +20,7 @@ namespace HomeBudget.Controllers
         // GET: SubCategories
         public ActionResult Index()
         {
-            var subCategories = _expensesubCategoriesRepository.GetWhereWithIncludes(x => x.Id > 0, x => x.ExpenseCategory).ToList();
+            var subCategories = _expensesubCategoriesRepository.GetWhereWithIncludes(x => x.Id > 0, x => x.Category).ToList();
             return View(subCategories);
         }
 
@@ -31,7 +31,7 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ExpenseSubCategory subCategory = _expensesubCategoriesRepository.GetWhereWithIncludes(subCat => subCat.Id == id, x => x.ExpenseCategory).FirstOrDefault();
+            ExpenseSubCategory subCategory = _expensesubCategoriesRepository.GetWhereWithIncludes(subCat => subCat.Id == id, x => x.Category).FirstOrDefault();
             if (subCategory == null)
             {
                 return HttpNotFound();
@@ -61,7 +61,7 @@ namespace HomeBudget.Controllers
             }
 
             var categories = _expenseCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
-            ViewBag.ExpenseCategoryId = new SelectList(categories, "Id", "CategoryName", subCategory.ExpenseCategoryId);
+            ViewBag.ExpenseCategoryId = new SelectList(categories, "Id", "CategoryName", subCategory.CategoryId);
             return View(subCategory);
         }
 
@@ -72,14 +72,14 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ExpenseSubCategory subCategory = _expensesubCategoriesRepository.GetWhereWithIncludes(subCat => subCat.Id == id, x => x.ExpenseCategory).FirstOrDefault();
+            ExpenseSubCategory subCategory = _expensesubCategoriesRepository.GetWhereWithIncludes(subCat => subCat.Id == id, x => x.Category).FirstOrDefault();
             if (subCategory == null)
             {
                 return HttpNotFound();
             }
 
             var categories = _expenseCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
-            ViewBag.ExpenseCategoryId = new SelectList(categories, "Id", "CategoryName", subCategory.ExpenseCategoryId);
+            ViewBag.ExpenseCategoryId = new SelectList(categories, "Id", "CategoryName", subCategory.CategoryId);
             return View(subCategory);
         }
 
@@ -97,7 +97,7 @@ namespace HomeBudget.Controllers
             }
 
             var categories = _expenseCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
-            ViewBag.ExpenseCategoryId = new SelectList(categories, "Id", "CategoryName", subCategory.ExpenseCategoryId);
+            ViewBag.ExpenseCategoryId = new SelectList(categories, "Id", "CategoryName", subCategory.CategoryId);
             return View(subCategory);
         }
 
@@ -108,7 +108,7 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ExpenseSubCategory subCategory = _expensesubCategoriesRepository.GetWhereWithIncludes(subCat => subCat.Id == id, x => x.ExpenseCategory).FirstOrDefault();
+            ExpenseSubCategory subCategory = _expensesubCategoriesRepository.GetWhereWithIncludes(subCat => subCat.Id == id, x => x.Category).FirstOrDefault();
             if (subCategory == null)
             {
                 return HttpNotFound();
@@ -121,7 +121,7 @@ namespace HomeBudget.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ExpenseSubCategory subCategory = _expensesubCategoriesRepository.GetWhereWithIncludes(subCat => subCat.Id == id, x => x.ExpenseCategory).FirstOrDefault();
+            ExpenseSubCategory subCategory = _expensesubCategoriesRepository.GetWhereWithIncludes(subCat => subCat.Id == id, x => x.Category).FirstOrDefault();
             _expensesubCategoriesRepository.Delete(subCategory);
             return RedirectToAction("Index");
         }

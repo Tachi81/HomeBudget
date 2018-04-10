@@ -33,7 +33,7 @@ namespace HomeBudget.Controllers
         public ActionResult Index()
         {
             var earningVm = new EarningViewModel();
-            earningVm.ListOfEarnings = _earningsRepository.GetWhereWithIncludes(x => x.Id > 0, x => x.BankAccount, x => x.EarningSubCategory, x => x.EarningCategory).ToList();
+            earningVm.ListOfEarnings = _earningsRepository.GetWhereWithIncludes(x => x.Id > 0, x => x.BankAccount, x => x.SubCategory, x => x.Category).ToList();
             return View(earningVm);
         }
 
@@ -45,7 +45,7 @@ namespace HomeBudget.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var earningVm = new EarningViewModel();
-            earningVm.Earning = _earningsRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.EarningSubCategory, x => x.EarningCategory).FirstOrDefault();
+            earningVm.Earning = _earningsRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.SubCategory, x => x.Category).FirstOrDefault();
             if (earningVm.Earning == null)
             {
                 return HttpNotFound();
@@ -88,7 +88,7 @@ namespace HomeBudget.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var earningVm = CreateVmWithLists();
-            earningVm.Earning = _earningsRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.EarningSubCategory, x => x.EarningCategory).FirstOrDefault();
+            earningVm.Earning = _earningsRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.SubCategory, x => x.Category).FirstOrDefault();
             if (earningVm.Earning == null)
             {
                 return HttpNotFound();
@@ -123,7 +123,7 @@ namespace HomeBudget.Controllers
             }
 
             var earningVm = new EarningViewModel();
-            earningVm.Earning = _earningsRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.EarningSubCategory, x => x.EarningCategory).FirstOrDefault();
+            earningVm.Earning = _earningsRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.SubCategory, x => x.Category).FirstOrDefault();
             if (earningVm.Earning == null)
             {
                 return HttpNotFound();
@@ -137,7 +137,7 @@ namespace HomeBudget.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             var earningVm = new EarningViewModel();
-            earningVm.Earning = _earningsRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.EarningSubCategory, x => x.EarningCategory).FirstOrDefault();
+            earningVm.Earning = _earningsRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.SubCategory, x => x.Category).FirstOrDefault();
             if (earningVm.Earning == null)
             {
                 return HttpNotFound();

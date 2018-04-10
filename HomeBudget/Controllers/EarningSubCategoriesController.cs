@@ -26,7 +26,7 @@ namespace HomeBudget.Controllers
         public ActionResult Index()
         {
             var earningSubCategories = _earningSubCategoriesRepository
-                .GetWhereWithIncludes(x => x.Id > 0, x => x.EarningCategory).ToList();
+                .GetWhereWithIncludes(x => x.Id > 0, x => x.Category).ToList();
             return View(earningSubCategories);
         }
 
@@ -69,7 +69,7 @@ namespace HomeBudget.Controllers
             }
 
             var earningCategories = _earningCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
-            ViewBag.EarningCategoryId = new SelectList(earningCategories, "Id", "CategoryName", earningSubCategory.EarningCategoryId);
+            ViewBag.EarningCategoryId = new SelectList(earningCategories, "Id", "CategoryName", earningSubCategory.CategoryId);
 
             return View(earningSubCategory);
         }
@@ -89,7 +89,7 @@ namespace HomeBudget.Controllers
             }
 
             var earningCategories = _earningCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
-            ViewBag.EarningCategoryId = new SelectList(earningCategories, "Id", "CategoryName", earningSubCategory.EarningCategoryId);
+            ViewBag.EarningCategoryId = new SelectList(earningCategories, "Id", "CategoryName", earningSubCategory.CategoryId);
 
             return View(earningSubCategory);
         }
@@ -107,7 +107,7 @@ namespace HomeBudget.Controllers
                 return RedirectToAction("Index");
             }
             var earningCategories = _earningCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
-            ViewBag.EarningCategoryId = new SelectList(earningCategories, "Id", "CategoryName", earningSubCategory.EarningCategoryId);
+            ViewBag.EarningCategoryId = new SelectList(earningCategories, "Id", "CategoryName", earningSubCategory.CategoryId);
             return View(earningSubCategory);
         }
 

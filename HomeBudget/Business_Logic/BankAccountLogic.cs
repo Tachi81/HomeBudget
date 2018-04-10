@@ -22,12 +22,12 @@ namespace HomeBudget.Business_Logic
             var bankAccountList = _bankAccountRepository.GetWhereWithIncludes(x => x.Id > 0, x => x.Expenses, x => x.Earnings, x => x.Transfers).ToList();
             foreach (var bankAccount in bankAccountList)
             {
-                var sumOfExpenses = bankAccount.Expenses.Sum(e => e.Cost);
-                var sumOfEarnings = bankAccount.Earnings.Sum(x => x.Income);
+                var sumOfExpenses = bankAccount.Expenses.Sum(e => e.AmountOfMoney);
+                var sumOfEarnings = bankAccount.Earnings.Sum(x => x.AmountOfMoney);
                 var sumOfTransferIncomes = _transferRepository.GetWhere(t => t.SourceBankAccountId == bankAccount.Id)
-                    .Sum(x => x.AmountTransferred);
+                    .Sum(x => x.AmountOfMoney);
                 var sumOfTransferOutcomes = _transferRepository.GetWhere(t => t.TargetBankAccountId == bankAccount.Id)
-                    .Sum(t => t.AmountTransferred);
+                    .Sum(t => t.AmountOfMoney);
                 bankAccount.Balance = bankAccount.InitialBalance - sumOfExpenses + sumOfEarnings + sumOfTransferIncomes- sumOfTransferOutcomes;
                 _bankAccountRepository.Update(bankAccount);
             }
