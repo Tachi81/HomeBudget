@@ -31,7 +31,7 @@ namespace HomeBudget.Controllers
         public ActionResult Index()
         {
             var transferVm = new TransferViewModel();
-            transferVm.ListOfTransfers = _transferRepository.GetWhere(t => t.Id > 0).ToList();
+            transferVm.ListOfTransfers = _transferRepository.GetWhereWithIncludes(t => t.Id > 0,t=>t.SourceBankAccount,t=>t.TargetBankAccount).ToList();
             return View(transferVm);
         }
 
@@ -43,7 +43,7 @@ namespace HomeBudget.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var transferVm = new TransferViewModel();
-            transferVm.Transfer = _transferRepository.GetWhere(transfer => transfer.Id == id).FirstOrDefault();
+            transferVm.Transfer = _transferRepository.GetWhereWithIncludes(transfer => transfer.Id == id, t => t.SourceBankAccount, t => t.TargetBankAccount).FirstOrDefault();
             if (transferVm.Transfer == null)
             {
                 return HttpNotFound();
@@ -92,7 +92,7 @@ namespace HomeBudget.Controllers
             }
 
             var transferVm = CreateTransferViewModelWithAccountSelectList();
-            transferVm.Transfer = _transferRepository.GetWhere(transfer => transfer.Id == id).FirstOrDefault();
+            transferVm.Transfer = _transferRepository.GetWhereWithIncludes(transfer => transfer.Id == id, t => t.SourceBankAccount, t => t.TargetBankAccount).FirstOrDefault();
             if (transferVm.Transfer == null)
             {
                 return HttpNotFound();

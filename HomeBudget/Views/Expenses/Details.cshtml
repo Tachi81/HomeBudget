@@ -19,14 +19,6 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Expense.ExpenseCategory.CategoryName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Expense.ExpenseCategory.CategoryName)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(model => model.Expense.Cost)
         </dt>
 
@@ -35,11 +27,20 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Expense.ExpenseSubcategoryId)
+            @Html.DisplayNameFor(model => model.Expense.ExpenseCategory.CategoryName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Expense.ExpenseSubcategoryId)
+            @Html.DisplayFor(model => model.Expense.ExpenseCategory.CategoryName)
+        </dd>
+
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Expense.ExpenseSubCategory.SubCategoryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Expense.ExpenseSubCategory.SubCategoryName)
         </dd>
 
         <dt>

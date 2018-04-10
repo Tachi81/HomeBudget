@@ -15,10 +15,10 @@
             @Html.DisplayNameFor(model => model.Transfer.AmountTransferred)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Transfer.SourceBankAccountId)
+            @Html.DisplayNameFor(model => model.Transfer.SourceBankAccount.AccountName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Transfer.TargetBankAccountId)
+            @Html.DisplayNameFor(model => model.Transfer.TargetBankAccount.AccountName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Transfer.DateTime)
@@ -35,10 +35,10 @@
             @Html.DisplayFor(modelItem => item.AmountTransferred)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.SourceBankAccountId)
+            @Html.DisplayFor(modelItem => item.SourceBankAccount.AccountName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.TargetBankAccountId)
+            @Html.DisplayFor(modelItem => item.TargetBankAccount.AccountName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DateTime)
