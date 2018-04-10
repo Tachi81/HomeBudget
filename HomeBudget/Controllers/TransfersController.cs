@@ -31,7 +31,7 @@ namespace HomeBudget.Controllers
         public ActionResult Index()
         {
             var transferVm = new TransferViewModel();
-            transferVm.ListOfTransfers = _transferRepository.GetWhereWithIncludes(t => t.Id > 0,t=>t.SourceBankAccount,t=>t.TargetBankAccount).ToList();
+            transferVm.ListOfTransfers = _transferRepository.GetWhereWithIncludes(t => t.Id > 0, t => t.SourceBankAccount, t => t.TargetBankAccount).ToList();
             return View(transferVm);
         }
 
@@ -75,7 +75,8 @@ namespace HomeBudget.Controllers
         {
             if (ModelState.IsValid)
             {
-               _transferRepository.Create(transferVm.Transfer);
+                _transferRepository.Create(transferVm.Transfer);
+                
                 _bankAccountLogic.CalculateBalanceOfAllAccounts();
                 return RedirectToAction("Index");
             }
@@ -148,6 +149,6 @@ namespace HomeBudget.Controllers
             return RedirectToAction("Index");
         }
 
-       
+
     }
 }

@@ -8,7 +8,6 @@ namespace HomeBudget.Models
     {
         public int Id { get; set; }
         public double Income { get; set; }
-        [ForeignKey("BankAccount")]
         public int BankAccountId { get; set; }
         public int EarningCategoryId { get; set; }
         public int EarningSubCategoryId { get; set; }

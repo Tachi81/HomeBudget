@@ -13,7 +13,7 @@ namespace HomeBudget.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201804092313141_CreateDB"; }
+            get { return "201804101307507_CreateDB"; }
         }
         
         string IMigrationMetadata.Source

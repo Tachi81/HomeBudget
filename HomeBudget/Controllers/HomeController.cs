@@ -18,11 +18,6 @@ namespace HomeBudget.Controllers
             return View("Index", _bankAccount.GetWhere(x => x.Id > 0));
         }
         
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
+       
     }
 }

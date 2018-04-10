@@ -244,13 +244,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804092313141_CreateDB.cs" />
-    <Compile Include="Migrations\201804092313141_CreateDB.Designer.cs">
-      <DependentUpon>201804092313141_CreateDB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804100706499_ChangedTransferModel.cs" />
-    <Compile Include="Migrations\201804100706499_ChangedTransferModel.Designer.cs">
-      <DependentUpon>201804100706499_ChangedTransferModel.cs</DependentUpon>
+    <Compile Include="Migrations\201804101307507_CreateDB.cs" />
+    <Compile Include="Migrations\201804101307507_CreateDB.Designer.cs">
+      <DependentUpon>201804101307507_CreateDB.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -385,11 +381,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804092313141_CreateDB.resx">
-      <DependentUpon>201804092313141_CreateDB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804100706499_ChangedTransferModel.resx">
-      <DependentUpon>201804100706499_ChangedTransferModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804101307507_CreateDB.resx">
+      <DependentUpon>201804101307507_CreateDB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

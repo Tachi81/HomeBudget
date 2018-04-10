@@ -30,13 +30,13 @@ namespace HomeBudget.Models
             return new ApplicationDbContext();
         }
 
-        public System.Data.Entity.DbSet<HomeBudget.Models.BankAccount> BankAccounts { get; set; }
-        public System.Data.Entity.DbSet<HomeBudget.Models.Expense> Expenses { get; set; }
+        public DbSet<BankAccount> BankAccounts { get; set; }
+        public DbSet<Expense> Expenses { get; set; }
         public DbSet<Earning> Earnings { get; set; }
-        public System.Data.Entity.DbSet<HomeBudget.Models.Transfer> Transfers { get; set; }
+        public DbSet<Transfer> Transfers { get; set; }
 
-        public System.Data.Entity.DbSet<HomeBudget.Models.ExpenseCategory> ExpenseCategories { get; set; }
-        public System.Data.Entity.DbSet<HomeBudget.Models.EarningCategory> EarningCategories { get; set; }
+        public DbSet<ExpenseCategory> ExpenseCategories { get; set; }
+        public DbSet<EarningCategory> EarningCategories { get; set; }
 
         public DbSet<ExpenseSubCategory> ExpenseSubCategories { get; set; }
         public DbSet<EarningSubCategory> EarningSubCategories { get; set; }

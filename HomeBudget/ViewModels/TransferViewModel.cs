@@ -12,6 +12,8 @@ namespace HomeBudget.ViewModels
         public Transfer Transfer { get; set; }
         public List<Transfer> ListOfTransfers { get; set; }
 
+        public List<int> ListOfEditedAccountsId { get; set; }
+
         public IEnumerable<SelectListItem> SelectListOfBankAccounts { get; set; }
     }
 }

@@ -106,18 +106,18 @@ namespace HomeBudget.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         AmountTransferred = c.Double(nullable: false),
-                        SourceBankAccountsId = c.Int(nullable: false),
-                        TargetBankAccountsId = c.Int(nullable: false),
+                        SourceBankAccountId = c.Int(nullable: false),
+                        TargetBankAccountId = c.Int(nullable: false),
                         DateTime = c.DateTime(nullable: false),
                         Note = c.String(),
                         BankAccount_Id = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.BankAccounts", t => t.SourceBankAccountsId, cascadeDelete: true)
-                .ForeignKey("dbo.BankAccounts", t => t.TargetBankAccountsId, cascadeDelete: false)
+                .ForeignKey("dbo.BankAccounts", t => t.SourceBankAccountId, cascadeDelete: true)
+                .ForeignKey("dbo.BankAccounts", t => t.TargetBankAccountId, cascadeDelete: false)
                 .ForeignKey("dbo.BankAccounts", t => t.BankAccount_Id)
-                .Index(t => t.SourceBankAccountsId)
-                .Index(t => t.TargetBankAccountsId)
+                .Index(t => t.SourceBankAccountId)
+                .Index(t => t.TargetBankAccountId)
                 .Index(t => t.BankAccount_Id);
             
             CreateTable(
@@ -197,8 +197,8 @@ namespace HomeBudget.Migrations
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
             DropForeignKey("dbo.Transfers", "BankAccount_Id", "dbo.BankAccounts");
-            DropForeignKey("dbo.Transfers", "TargetBankAccountsId", "dbo.BankAccounts");
-            DropForeignKey("dbo.Transfers", "SourceBankAccountsId", "dbo.BankAccounts");
+            DropForeignKey("dbo.Transfers", "TargetBankAccountId", "dbo.BankAccounts");
+            DropForeignKey("dbo.Transfers", "SourceBankAccountId", "dbo.BankAccounts");
             DropForeignKey("dbo.Expenses", "ExpenseSubcategoryId", "dbo.ExpenseSubCategories");
             DropForeignKey("dbo.Expenses", "ExpenseCategoryId", "dbo.ExpenseCategories");
             DropForeignKey("dbo.ExpenseSubCategories", "ExpenseCategoryId", "dbo.ExpenseCategories");
@@ -214,8 +214,8 @@ namespace HomeBudget.Migrations
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.Transfers", new[] { "BankAccount_Id" });
-            DropIndex("dbo.Transfers", new[] { "TargetBankAccountsId" });
-            DropIndex("dbo.Transfers", new[] { "SourceBankAccountsId" });
+            DropIndex("dbo.Transfers", new[] { "TargetBankAccountId" });
+            DropIndex("dbo.Transfers", new[] { "SourceBankAccountId" });
             DropIndex("dbo.ExpenseSubCategories", new[] { "ExpenseCategoryId" });
             DropIndex("dbo.Expenses", new[] { "ExpenseSubcategoryId" });
             DropIndex("dbo.Expenses", new[] { "ExpenseCategoryId" });
