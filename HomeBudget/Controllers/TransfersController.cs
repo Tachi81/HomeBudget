@@ -6,18 +6,33 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using HomeBudget.Business_Logic;
+using HomeBudget.DAL.Interfaces;
+using HomeBudget.DAL.Repositories;
 using HomeBudget.Models;
+using HomeBudget.ViewModels;
 
 namespace HomeBudget.Controllers
 {
     public class TransfersController : Controller
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private readonly ITransferRepository _transferRepository;
+        private readonly IBankAccountRepository _bankAccountRepository;
+        private readonly IBankAccountLogic _bankAccountLogic;
+
+        public TransfersController(ITransferRepository transferRepository, IBankAccountRepository bankAccountRepository, IBankAccountLogic bankAccountLogic)
+        {
+            _transferRepository = transferRepository;
+            _bankAccountRepository = bankAccountRepository;
+            _bankAccountLogic = bankAccountLogic;
+        }
 
         // GET: Transfers
         public ActionResult Index()
         {
-            return View(db.Transfers.ToList());
+            var transferVm = new TransferViewModel();
+            transferVm.ListOfTransfers = _transferRepository.GetWhere(t => t.Id > 0).ToList();
+            return View(transferVm);
         }
 
         // GET: Transfers/Details/5
@@ -27,18 +42,28 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Transfer transfer = db.Transfers.Find(id);
-            if (transfer == null)
+            var transferVm = new TransferViewModel();
+            transferVm.Transfer = _transferRepository.GetWhere(transfer => transfer.Id == id).FirstOrDefault();
+            if (transferVm.Transfer == null)
             {
                 return HttpNotFound();
             }
-            return View(transfer);
+            return View(transferVm);
         }
 
         // GET: Transfers/Create
         public ActionResult Create()
         {
-            return View();
+            var transferVm = CreateTransferViewModelWithAccountSelectList();
+            return View(transferVm);
+        }
+
+        private TransferViewModel CreateTransferViewModelWithAccountSelectList()
+        {
+            var transferVm = new TransferViewModel();
+            var bankAccountsList = _bankAccountRepository.GetWhere(b => b.Id > 0).ToList();
+            transferVm.SelectListOfBankAccounts = new SelectList(bankAccountsList, "Id", "AccountName");
+            return transferVm;
         }
 
         // POST: Transfers/Create
@@ -46,16 +71,16 @@ namespace HomeBudget.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create( Transfer transfer)
+        public ActionResult Create(TransferViewModel transferVm)
         {
             if (ModelState.IsValid)
             {
-                db.Transfers.Add(transfer);
-                db.SaveChanges();
+               _transferRepository.Create(transferVm.Transfer);
+                _bankAccountLogic.CalculateBalanceOfAllAccounts();
                 return RedirectToAction("Index");
             }
 
-            return View(transfer);
+            return View(transferVm);
         }
 
         // GET: Transfers/Edit/5
@@ -65,12 +90,14 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Transfer transfer = db.Transfers.Find(id);
-            if (transfer == null)
+
+            var transferVm = CreateTransferViewModelWithAccountSelectList();
+            transferVm.Transfer = _transferRepository.GetWhere(transfer => transfer.Id == id).FirstOrDefault();
+            if (transferVm.Transfer == null)
             {
                 return HttpNotFound();
             }
-            return View(transfer);
+            return View(transferVm);
         }
 
         // POST: Transfers/Edit/5
@@ -78,15 +105,15 @@ namespace HomeBudget.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,AmountTransferred,SourceBankAccountsId,TargetBankAccountsId,DateTime,Note")] Transfer transfer)
+        public ActionResult Edit(TransferViewModel transferVm)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(transfer).State = EntityState.Modified;
-                db.SaveChanges();
+                _transferRepository.Update(transferVm.Transfer);
+                _bankAccountLogic.CalculateBalanceOfAllAccounts();
                 return RedirectToAction("Index");
             }
-            return View(transfer);
+            return View(transferVm);
         }
 
         // GET: Transfers/Delete/5
@@ -96,12 +123,13 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Transfer transfer = db.Transfers.Find(id);
-            if (transfer == null)
+            var transferVm = new TransferViewModel();
+            transferVm.Transfer = _transferRepository.GetWhere(transfer => transfer.Id == id).FirstOrDefault();
+            if (transferVm.Transfer == null)
             {
                 return HttpNotFound();
             }
-            return View(transfer);
+            return View(transferVm);
         }
 
         // POST: Transfers/Delete/5
@@ -109,19 +137,17 @@ namespace HomeBudget.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Transfer transfer = db.Transfers.Find(id);
-            db.Transfers.Remove(transfer);
-            db.SaveChanges();
+            var transferVm = new TransferViewModel();
+            transferVm.Transfer = _transferRepository.GetWhere(transfer => transfer.Id == id).FirstOrDefault();
+            if (transferVm.Transfer == null)
+            {
+                return HttpNotFound();
+            }
+            _transferRepository.Delete(transferVm.Transfer);
+            _bankAccountLogic.CalculateBalanceOfAllAccounts();
             return RedirectToAction("Index");
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+       
     }
 }

@@ -1,9 +1,9 @@
 ﻿using HomeBudget.DAL.Interfaces;
 using HomeBudget.Models;
 
-namespace HomeBudget.DAL.Repositories
+namespace HomeBudget.DAL.Interfaces
 {
-    internal interface ITransferRepository : IAbstractRepository<Transfer>, IGetListWithIncludes<Transfer>
+    public interface ITransferRepository : IAbstractRepository<Transfer>, IGetListWithIncludes<Transfer>
     {
     }
 }

@@ -52,6 +52,7 @@ namespace HomeBudget.App_Start
 
                 kernel.Bind<IExpensesRepository>().To<ExpensesRepository>();
                 kernel.Bind<IEarningsRepository>().To<EarningsRepository>();
+                kernel.Bind<ITransferRepository>().To<TransferRepository>();
 
                 kernel.Bind<IExpenseCategoriesRepository>().To<ExpenseCategoriesRepository>();
                 kernel.Bind<IEarningCategoriesRepository>().To<EarningCategoriesRepository>();
