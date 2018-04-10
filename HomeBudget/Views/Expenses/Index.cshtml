@@ -15,13 +15,13 @@
             @Html.DisplayNameFor(model => model.Expense.BankAccount.AccountName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Expense.Cost)
+            @Html.DisplayNameFor(model => model.Expense.AmountOfMoney)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Expense.ExpenseCategory.CategoryName)
+            @Html.DisplayNameFor(model => model.Expense.Category.CategoryName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Expense.ExpenseSubCategory.SubCategoryName)
+            @Html.DisplayNameFor(model => model.Expense.SubCategory.SubCategoryName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Expense.DateTime)
@@ -38,13 +38,13 @@
             @Html.DisplayFor(modelItem => item.BankAccount.AccountName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Cost)
+            @Html.DisplayFor(modelItem => item.AmountOfMoney)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ExpenseCategory.CategoryName)
+            @Html.DisplayFor(modelItem => item.Category.CategoryName)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ExpenseSubCategory.SubCategoryName)
+            @Html.DisplayFor(modelItem => item.SubCategory.SubCategoryName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.DateTime.DayOfWeek)

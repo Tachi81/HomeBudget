@@ -12,7 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Transfer.AmountTransferred)
+            @Html.DisplayNameFor(model => model.Transfer.AmountOfMoney)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Transfer.SourceBankAccount)
@@ -32,7 +32,7 @@
 @foreach (var item in Model.ListOfTransfers) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.AmountTransferred)
+            @Html.DisplayFor(modelItem => item.AmountOfMoney)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.SourceBankAccount.AccountName)
