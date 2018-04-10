@@ -5,10 +5,8 @@ using System.Web;
 
 namespace HomeBudget.Models
 {
-    public class ExpenseCategory 
+    public class ExpenseCategory : Category
     {
-        public int Id { get; set; }
-        public string CategoryName { get; set; }
-        public virtual ICollection<ExpenseSubCategory> Subcategories { get; set; }
+        public new virtual ICollection<ExpenseSubCategory> Subcategories { get; set; }
     }
 }

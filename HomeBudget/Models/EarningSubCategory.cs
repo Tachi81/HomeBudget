@@ -6,13 +6,8 @@ using System.Web;
 
 namespace HomeBudget.Models
 {
-    public class EarningSubCategory 
+    public class EarningSubCategory : SubCategory
     {
-        public int Id { get; set; }
-        public string SubCategoryName { get; set; }
-        [ForeignKey("EarningCategory")]
-        public int EarningCategoryId { get; set; }
-
-        public virtual EarningCategory EarningCategory { get; set; }
+        public new virtual EarningCategory Category { get; set; }
     }
 }

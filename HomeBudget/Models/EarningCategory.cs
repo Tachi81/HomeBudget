@@ -5,10 +5,9 @@ using System.Web;
 
 namespace HomeBudget.Models
 {
-    public class EarningCategory 
+    public class EarningCategory : Category
     {
-        public int Id { get; set; }
-        public string CategoryName { get; set; }
-        public virtual ICollection<EarningSubCategory> Subcategories { get; set; }
+       
+        public new virtual ICollection<EarningSubCategory> Subcategories { get; set; }
     }
 }

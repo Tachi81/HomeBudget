@@ -6,13 +6,9 @@ using System.Web;
 
 namespace HomeBudget.Models
 {
-    public class ExpenseSubCategory 
+    public class ExpenseSubCategory : SubCategory
     {
-        public int Id { get; set; }
-        public string SubCategoryName { get; set; }
-       [ForeignKey("ExpenseCategory")]
-        public int ExpenseCategoryId { get; set; }
-
-        public virtual ExpenseCategory ExpenseCategory { get; set; }
+      
+        public new virtual ExpenseCategory Category { get; set; }
     }
 }
