@@ -8,7 +8,7 @@ using HomeBudget.Models;
 
 namespace HomeBudget.DAL.Repositories
 {
-    public  class AbstractRepository<T> : IAbstractRepository<T>, IGetListWithIncludes<T> where T : class
+    public  class AbstractRepository<T> : IAbstractRepository<T> where T : class
     {
         public virtual void Create(T entity)
         {

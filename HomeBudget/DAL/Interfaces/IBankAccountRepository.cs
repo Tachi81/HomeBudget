@@ -2,7 +2,7 @@
 
 namespace HomeBudget.DAL.Interfaces
 {
-    public interface IBankAccountRepository : IAbstractRepository<BankAccount>, IGetListWithIncludes<BankAccount>
+    public interface IBankAccountRepository : IAbstractRepository<BankAccount>
     {
     }
 }

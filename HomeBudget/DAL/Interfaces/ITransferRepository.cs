@@ -3,7 +3,7 @@ using HomeBudget.Models;
 
 namespace HomeBudget.DAL.Interfaces
 {
-    public interface ITransferRepository : IAbstractRepository<Transfer>, IGetListWithIncludes<Transfer>
+    public interface ITransferRepository : IAbstractRepository<Transfer>
     {
     }
 }

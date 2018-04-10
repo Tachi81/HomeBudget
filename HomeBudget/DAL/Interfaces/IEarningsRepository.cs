@@ -2,7 +2,7 @@
 
 namespace HomeBudget.DAL.Interfaces
 {
-    public interface IEarningsRepository : IAbstractRepository<Earning>, IGetListWithIncludes<Earning>
+    public interface IEarningsRepository : IAbstractRepository<Earning>
     {
     }
 }

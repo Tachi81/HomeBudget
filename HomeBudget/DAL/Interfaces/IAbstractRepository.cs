@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace HomeBudget.DAL.Interfaces
 {
-    public interface IAbstractRepository<T> where T : class
+    public interface IAbstractRepository<T> : IGetListWithIncludes<T> where T : class 
     {
         void Create(T entity);
         void Delete(T entity);
