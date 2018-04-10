@@ -10,14 +10,14 @@ namespace HomeBudget.Models
     {
         public int Id { get; set; }
         public double AmountTransferred { get; set; }
-        public int SourceBankAccountsId { get; set; }
-        public int TargetBankAccountsId { get; set; }
+        public int SourceBankAccountId { get; set; }
+        public int TargetBankAccountId { get; set; }
 
         public DateTime DateTime { get; set; }
         public string Note { get; set; }
 
-        public BankAccount SourceBankAccounts { get; set; }
-        public BankAccount TargetBankAccounts { get; set; }
+        public BankAccount SourceBankAccount { get; set; }
+        public BankAccount TargetBankAccount { get; set; }
 
     }
 }
