@@ -1,7 +1,7 @@
-﻿@model HomeBudget.Models.Transfer
+﻿@model HomeBudget.ViewModels.TransferViewModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Transfer";
 }
 
 <h2>Details</h2>
@@ -11,48 +11,48 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.AmountTransferred)
+            @Html.DisplayNameFor(model => model.Transfer.AmountTransferred)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.AmountTransferred)
+            @Html.DisplayFor(model => model.Transfer.AmountTransferred)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SourceBankAccountId)
+            @Html.DisplayNameFor(model => model.Transfer.SourceBankAccountId)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.SourceBankAccountId)
+            @Html.DisplayFor(model => model.Transfer.SourceBankAccountId)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TargetBankAccountId)
+            @Html.DisplayNameFor(model => model.Transfer.TargetBankAccountId)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TargetBankAccountId)
+            @Html.DisplayFor(model => model.Transfer.TargetBankAccountId)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.DateTime)
+            @Html.DisplayNameFor(model => model.Transfer.DateTime)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.DateTime)
+            @Html.DisplayFor(model => model.Transfer.DateTime)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Note)
+            @Html.DisplayNameFor(model => model.Transfer.Note)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Note)
+            @Html.DisplayFor(model => model.Transfer.Note)
         </dd>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Transfer.Id }) |
     @Html.ActionLink("Back to List", "Index")
 </p>

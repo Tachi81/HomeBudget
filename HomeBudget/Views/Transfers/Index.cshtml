@@ -1,10 +1,10 @@
-﻿@model IEnumerable<HomeBudget.Models.Transfer>
+﻿@model HomeBudget.ViewModels.TransferViewModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Transfers";
 }
 
-<h2>Index</h2>
+<h2>Transfers</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,24 +12,24 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.AmountTransferred)
+            @Html.DisplayNameFor(model => model.Transfer.AmountTransferred)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.SourceBankAccountId)
+            @Html.DisplayNameFor(model => model.Transfer.SourceBankAccountId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.TargetBankAccountId)
+            @Html.DisplayNameFor(model => model.Transfer.TargetBankAccountId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.DateTime)
+            @Html.DisplayNameFor(model => model.Transfer.DateTime)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Note)
+            @Html.DisplayNameFor(model => model.Transfer.Note)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.ListOfTransfers) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.AmountTransferred)
