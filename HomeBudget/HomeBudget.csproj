@@ -239,6 +239,8 @@
     <Compile Include="DAL\Interfaces\IEarningCategoriesRepository.cs" />
     <Compile Include="DAL\Interfaces\IExpenseSubCategoriesRepository.cs" />
     <Compile Include="DAL\Interfaces\IEarningSubCategoriesRepository.cs" />
+    <Compile Include="DAL\Interfaces\ITransferRepository.cs" />
+    <Compile Include="DAL\Repositories\TransferRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -268,6 +270,7 @@
     <Compile Include="ViewModels\BankAccountViewModel.cs" />
     <Compile Include="ViewModels\EarningViewModel.cs" />
     <Compile Include="ViewModels\ExpenseViewModel.cs" />
+    <Compile Include="ViewModels\TransferViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
