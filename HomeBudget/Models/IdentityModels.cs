@@ -45,9 +45,12 @@ namespace HomeBudget.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<BankAccount>().Property(ex => ex.AccountName).IsRequired();
+
             modelBuilder.Entity<ExpenseCategory>().Property(expenseCategory => expenseCategory.CategoryName).IsRequired().HasMaxLength(50);
             modelBuilder.Entity<ExpenseSubCategory>().Property(ex => ex.SubCategoryName).IsRequired();
-            
+
             modelBuilder.Entity<EarningCategory>().Property(expenseCategory => expenseCategory.CategoryName).IsRequired().HasMaxLength(50);
             modelBuilder.Entity<EarningSubCategory>().Property(ex => ex.SubCategoryName).IsRequired();
 

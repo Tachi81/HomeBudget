@@ -7,6 +7,7 @@ namespace HomeBudget.Models
 {
     public class ExpenseCategory : Category
     {
+        public new string CategoryName { get; set; }
         public new virtual ICollection<ExpenseSubCategory> Subcategories { get; set; }
     }
 }
