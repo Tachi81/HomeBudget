@@ -213,6 +213,7 @@
     <Compile Include="Controllers\EarningCategoriesController.cs" />
     <Compile Include="Controllers\EarningsController.cs" />
     <Compile Include="Controllers\EarningSubCategoriesController.cs" />
+    <Compile Include="Controllers\FinancialOperationsController.cs" />
     <Compile Include="Controllers\TransfersController.cs" />
     <Compile Include="DAL\Interfaces\IBankAccountLogic.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -240,6 +241,8 @@
     <Compile Include="DAL\Interfaces\IExpenseSubCategoriesRepository.cs" />
     <Compile Include="DAL\Interfaces\IEarningSubCategoriesRepository.cs" />
     <Compile Include="DAL\Interfaces\ITransferRepository.cs" />
+    <Compile Include="DAL\Repositories\FinancialOperationsRepository.cs" />
+    <Compile Include="DAL\Interfaces\IFinancialOperationsRepository.cs" />
     <Compile Include="DAL\Repositories\TransferRepository.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -270,6 +273,7 @@
     <Compile Include="ViewModels\EarningViewModel.cs" />
     <Compile Include="ViewModels\ExpenseSubCategoryViewModel.cs" />
     <Compile Include="ViewModels\ExpenseViewModel.cs" />
+    <Compile Include="ViewModels\FinancialOperationsHistoryViewModel.cs" />
     <Compile Include="ViewModels\TransferViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -425,6 +429,8 @@
     <Content Include="Views\Transfers\Details.cshtml" />
     <Content Include="Views\Transfers\Edit.cshtml" />
     <Content Include="Views\Transfers\Index.cshtml" />
+    <Content Include="Views\FinancialOperations\Index.cshtml" />
+    <Content Include="Views\FinancialOperations\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
