@@ -33,6 +33,7 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             var expenseSubcategoryVm = new ExpenseSubCategoryViewModel();
             expenseSubcategoryVm.SubCategory = _expensesubCategoriesRepository.GetWhereWithIncludes(subCat => subCat.Id == id, x => x.Category).FirstOrDefault();
             if (expenseSubcategoryVm.SubCategory == null)
@@ -48,8 +49,6 @@ namespace HomeBudget.Controllers
             var expenseSubcategoryVm = CreateExpenseSubCategoryViewModelWithSelectLists();
             return View(expenseSubcategoryVm);
         }
-
-
 
         // POST: SubCategories/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
