@@ -8,6 +8,6 @@ namespace HomeBudget.Models
 {
     public class EarningSubCategory : SubCategory
     {
-        public new virtual EarningCategory Category { get; set; }
+   
     }
 }

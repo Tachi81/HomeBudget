@@ -9,6 +9,6 @@ namespace HomeBudget.Models
     public class ExpenseSubCategory : SubCategory
     {
       
-        public new virtual ExpenseCategory Category { get; set; }
+       
     }
 }
