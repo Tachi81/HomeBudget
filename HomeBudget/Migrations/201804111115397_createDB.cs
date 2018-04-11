@@ -3,7 +3,7 @@ namespace HomeBudget.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class CreateDB : DbMigration
+    public partial class createDB : DbMigration
     {
         public override void Up()
         {
@@ -209,7 +209,6 @@ namespace HomeBudget.Migrations
             DropForeignKey("dbo.Transfers", "SubCategoryId", "dbo.SubCategories");
             DropForeignKey("dbo.Transfers", "SourceBankAccountId", "dbo.BankAccounts");
             DropForeignKey("dbo.Transfers", "CategoryId", "dbo.Categories");
-            DropForeignKey("dbo.SubCategories", "CategoryId", "dbo.Categories");
             DropForeignKey("dbo.Transfers", "BankAccountId", "dbo.BankAccounts");
             DropForeignKey("dbo.Expenses", "BankAccount_Id", "dbo.BankAccounts");
             DropForeignKey("dbo.Expenses", "TargetBankAccountId", "dbo.BankAccounts");
@@ -222,6 +221,7 @@ namespace HomeBudget.Migrations
             DropForeignKey("dbo.Earnings", "SubCategoryId", "dbo.SubCategories");
             DropForeignKey("dbo.Earnings", "SourceBankAccountId", "dbo.BankAccounts");
             DropForeignKey("dbo.Earnings", "CategoryId", "dbo.Categories");
+            DropForeignKey("dbo.SubCategories", "CategoryId", "dbo.Categories");
             DropForeignKey("dbo.Earnings", "BankAccountId", "dbo.BankAccounts");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
