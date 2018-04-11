@@ -41,7 +41,7 @@ namespace HomeBudget.Controllers
             }
             var earningSubCategoryVm = new EarningSubcategoryViewModel();
             earningSubCategoryVm.SubCategory =
-                _earningSubCategoriesRepository.GetWhere(x => x.Id == id).FirstOrDefault();
+                _earningSubCategoriesRepository.GetWhereWithIncludes(x => x.Id == id,subc=>subc.Category).FirstOrDefault();
             if (earningSubCategoryVm.SubCategory == null)
             {
                 return HttpNotFound();

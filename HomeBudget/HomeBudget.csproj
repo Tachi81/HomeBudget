@@ -244,9 +244,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804102134424_CreateDB.cs" />
-    <Compile Include="Migrations\201804102134424_CreateDB.Designer.cs">
-      <DependentUpon>201804102134424_CreateDB.cs</DependentUpon>
+    <Compile Include="Migrations\201804111115397_createDB.cs" />
+    <Compile Include="Migrations\201804111115397_createDB.Designer.cs">
+      <DependentUpon>201804111115397_createDB.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -385,8 +385,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804102134424_CreateDB.resx">
-      <DependentUpon>201804102134424_CreateDB.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804111115397_createDB.resx">
+      <DependentUpon>201804111115397_createDB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
