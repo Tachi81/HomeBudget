@@ -55,15 +55,7 @@ namespace HomeBudget.Controllers
             var earningSubCategoryVm = CreateEarningSubcategoryWithSelectList();
             return View(earningSubCategoryVm);
         }
-
-        private EarningSubcategoryViewModel CreateEarningSubcategoryWithSelectList()
-        {
-            var earningSubCategoryVm = new EarningSubcategoryViewModel();
-            var earningCategories = _earningCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
-            earningSubCategoryVm.SelectListOfEarningCategories = new SelectList(earningCategories, "Id", "CategoryName");
-            return earningSubCategoryVm;
-        }
-
+        
         // POST: EarningSubCategories/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -125,7 +117,7 @@ namespace HomeBudget.Controllers
             }
             var earningSubCategoryVm = new EarningSubcategoryViewModel();
             earningSubCategoryVm.SubCategory =
-                _earningSubCategoriesRepository.GetWhere(subCategory => subCategory.Id == id).FirstOrDefault();
+                _earningSubCategoriesRepository.GetWhereWithIncludes(earningSubCategory => earningSubCategory.Id == id, subc => subc.Category).FirstOrDefault();
             if (earningSubCategoryVm.SubCategory == null)
             {
                 return HttpNotFound();
@@ -140,9 +132,22 @@ namespace HomeBudget.Controllers
         {
             var earningSubCategoryVm = new EarningSubcategoryViewModel();
             earningSubCategoryVm.SubCategory =
-                _earningSubCategoriesRepository.GetWhere(earningSubCategory => earningSubCategory.Id == id).FirstOrDefault();
+                _earningSubCategoriesRepository.GetWhereWithIncludes(earningSubCategory => earningSubCategory.Id == id, subc=>subc.Category).FirstOrDefault();
             _earningSubCategoriesRepository.Delete(earningSubCategoryVm.SubCategory);
             return RedirectToAction("Index");
+
+
+
+
+
+        }
+
+        private EarningSubcategoryViewModel CreateEarningSubcategoryWithSelectList()
+        {
+            var earningSubCategoryVm = new EarningSubcategoryViewModel();
+            var earningCategories = _earningCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
+            earningSubCategoryVm.SelectListOfEarningCategories = new SelectList(earningCategories, "Id", "CategoryName");
+            return earningSubCategoryVm;
         }
 
     }
