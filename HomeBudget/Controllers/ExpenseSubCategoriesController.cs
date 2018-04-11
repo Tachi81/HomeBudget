@@ -3,6 +3,7 @@ using System.Net;
 using System.Web.Mvc;
 using HomeBudget.DAL.Interfaces;
 using HomeBudget.Models;
+using HomeBudget.ViewModels;
 
 namespace HomeBudget.Controllers
 {
@@ -20,8 +21,9 @@ namespace HomeBudget.Controllers
         // GET: SubCategories
         public ActionResult Index()
         {
-            var subCategories = _expensesubCategoriesRepository.GetWhereWithIncludes(x => x.Id > 0, x => x.Category).ToList();
-            return View(subCategories);
+            var expenseSubcategoryVm = new ExpenseSubCategoryViewModel();
+            expenseSubcategoryVm.ListOfExpenseSubCategories = _expensesubCategoriesRepository.GetWhereWithIncludes(x => x.Id > 0, x => x.Category).ToList();
+            return View(expenseSubcategoryVm);
         }
 
         // GET: SubCategories/Details/5
@@ -31,38 +33,39 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ExpenseSubCategory subCategory = _expensesubCategoriesRepository.GetWhereWithIncludes(subCat => subCat.Id == id, x => x.Category).FirstOrDefault();
-            if (subCategory == null)
+            var expenseSubcategoryVm = new ExpenseSubCategoryViewModel();
+            expenseSubcategoryVm.SubCategory = _expensesubCategoriesRepository.GetWhereWithIncludes(subCat => subCat.Id == id, x => x.Category).FirstOrDefault();
+            if (expenseSubcategoryVm.SubCategory == null)
             {
                 return HttpNotFound();
             }
-            return View(subCategory);
+            return View(expenseSubcategoryVm);
         }
 
         // GET: SubCategories/Create
         public ActionResult Create()
         {
-            var categories = _expenseCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
-            ViewBag.ExpenseCategoryId = new SelectList(categories, "Id", "CategoryName");
-            return View();
+            var expenseSubcategoryVm = CreateExpenseSubCategoryViewModelWithSelectLists();
+            return View(expenseSubcategoryVm);
         }
+
+
 
         // POST: SubCategories/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ExpenseSubCategory subCategory)
+        public ActionResult Create(ExpenseSubCategoryViewModel expenseSubcategoryVm)
         {
             if (ModelState.IsValid)
             {
-                _expensesubCategoriesRepository.Create(subCategory);
+                _expensesubCategoriesRepository.Create(expenseSubcategoryVm.SubCategory);
                 return RedirectToAction("Index");
             }
 
-            var categories = _expenseCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
-            ViewBag.ExpenseCategoryId = new SelectList(categories, "Id", "CategoryName", subCategory.CategoryId);
-            return View(subCategory);
+            expenseSubcategoryVm = CreateExpenseSubCategoryViewModelWithSelectLists();
+            return View(expenseSubcategoryVm);
         }
 
         // GET: SubCategories/Edit/5
@@ -72,15 +75,13 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ExpenseSubCategory subCategory = _expensesubCategoriesRepository.GetWhereWithIncludes(subCat => subCat.Id == id, x => x.Category).FirstOrDefault();
-            if (subCategory == null)
+            var expenseSubcategoryVm = CreateExpenseSubCategoryViewModelWithSelectLists();
+            expenseSubcategoryVm.SubCategory = _expensesubCategoriesRepository.GetWhereWithIncludes(subCat => subCat.Id == id, x => x.Category).FirstOrDefault();
+            if (expenseSubcategoryVm.SubCategory == null)
             {
                 return HttpNotFound();
             }
-
-            var categories = _expenseCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
-            ViewBag.ExpenseCategoryId = new SelectList(categories, "Id", "CategoryName", subCategory.CategoryId);
-            return View(subCategory);
+            return View(expenseSubcategoryVm);
         }
 
         // POST: SubCategories/Edit/5
@@ -88,17 +89,16 @@ namespace HomeBudget.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(ExpenseSubCategory subCategory)
+        public ActionResult Edit(ExpenseSubCategoryViewModel expenseSubcategoryVm)
         {
             if (ModelState.IsValid)
             {
-                _expensesubCategoriesRepository.Update(subCategory);
+                _expensesubCategoriesRepository.Update(expenseSubcategoryVm.SubCategory);
                 return RedirectToAction("Index");
             }
 
-            var categories = _expenseCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
-            ViewBag.ExpenseCategoryId = new SelectList(categories, "Id", "CategoryName", subCategory.CategoryId);
-            return View(subCategory);
+            expenseSubcategoryVm = CreateExpenseSubCategoryViewModelWithSelectLists();
+            return View(expenseSubcategoryVm);
         }
 
         // GET: SubCategories/Delete/5
@@ -108,12 +108,13 @@ namespace HomeBudget.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ExpenseSubCategory subCategory = _expensesubCategoriesRepository.GetWhereWithIncludes(subCat => subCat.Id == id, x => x.Category).FirstOrDefault();
-            if (subCategory == null)
+            var expenseSubcategoryVm = new ExpenseSubCategoryViewModel();
+            expenseSubcategoryVm.SubCategory = _expensesubCategoriesRepository.GetWhereWithIncludes(subCat => subCat.Id == id, x => x.Category).FirstOrDefault();
+            if (expenseSubcategoryVm.SubCategory == null)
             {
                 return HttpNotFound();
             }
-            return View(subCategory);
+            return View(expenseSubcategoryVm);
         }
 
         // POST: SubCategories/Delete/5
@@ -121,11 +122,23 @@ namespace HomeBudget.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ExpenseSubCategory subCategory = _expensesubCategoriesRepository.GetWhereWithIncludes(subCat => subCat.Id == id, x => x.Category).FirstOrDefault();
-            _expensesubCategoriesRepository.Delete(subCategory);
+            var expenseSubcategoryVm = new ExpenseSubCategoryViewModel();
+            expenseSubcategoryVm.SubCategory = _expensesubCategoriesRepository.GetWhereWithIncludes(subCat => subCat.Id == id, x => x.Category).FirstOrDefault();
+
+            _expensesubCategoriesRepository.Delete(expenseSubcategoryVm.SubCategory);
             return RedirectToAction("Index");
         }
 
 
+
+
+
+        private ExpenseSubCategoryViewModel CreateExpenseSubCategoryViewModelWithSelectLists()
+        {
+            var expenseSubcategoryVm = new ExpenseSubCategoryViewModel();
+            var categories = _expenseCategoriesRepository.GetWhere(x => x.Id > 0).ToList();
+            expenseSubcategoryVm.SelectListOfExpenseCategories = new SelectList(categories, "Id", "CategoryName");
+            return expenseSubcategoryVm;
+        }
     }
 }
