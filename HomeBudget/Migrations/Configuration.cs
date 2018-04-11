@@ -1,3 +1,5 @@
+using HomeBudget.Models;
+
 namespace HomeBudget.Migrations
 {
     using System;
@@ -26,6 +28,18 @@ namespace HomeBudget.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+            context.BankAccounts.AddOrUpdate(
+                bankAccount => bankAccount.Id,
+                new BankAccount { InitialBalance = 1300.0, AccountName = "Tomek Bank Account" },
+                new BankAccount { InitialBalance = 1300.0, AccountName = "Phiona Account" }
+                );
+
+            context.EarningCategories.AddOrUpdate(
+                cat=>cat.Id,
+                new EarningCategory { CategoryName = "Official Salary" }
+                );
+
         }
     }
 }
