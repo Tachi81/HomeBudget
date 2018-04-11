@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - Home Budget</title>
     @Styles.Render("~/Content/css")
+    @Styles.Render("~/jQuery-UI/css")
     @Scripts.Render("~/bundles/modernizr")
+
 
 </head>
 <body>
@@ -44,6 +46,8 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jQuery-UI")
+    @Scripts.Render("~/bundles/datepicker")
     @RenderSection("scripts", required: false)
 </body>
 </html>
