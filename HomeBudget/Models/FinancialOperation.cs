@@ -11,7 +11,7 @@ namespace HomeBudget.Models
         public int Id { get; set; }
         public double AmountOfMoney { get; set; }
         public int? BankAccountId { get; set; }
-        public int? CategoryId { get; set; }
+        
         public int? SubCategoryId { get; set; }
 
         public string DescriptionOfOperation { get; set; }
@@ -26,7 +26,7 @@ namespace HomeBudget.Models
         public virtual BankAccount TargetBankAccount { get; set; }
 
         public virtual BankAccount BankAccount { get; set; }
-        public virtual Category Category { get; set; }
+        
         public virtual SubCategory SubCategory { get; set; }
     }
 }

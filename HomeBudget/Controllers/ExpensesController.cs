@@ -34,7 +34,8 @@ namespace HomeBudget.Controllers
         public ActionResult Index()
         {
             var expenseVm = new ExpenseViewModel();
-             expenseVm.ListOfExpenses = _expenseRepository.GetWhereWithIncludes(e => e.Id > 0, x=>x.BankAccount, x=>x.SubCategory, x=>x.Category).ToList();
+             expenseVm.ListOfExpenses = _expenseRepository.GetWhereWithIncludes(e => e.Id > 0, 
+                 x=>x.BankAccount, x=>x.SubCategory, x=>x.SubCategory.Category).ToList();
             return View(expenseVm);
         }
 
@@ -46,7 +47,8 @@ namespace HomeBudget.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var expenseVm = new ExpenseViewModel();
-            expenseVm.Expense = _expenseRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.SubCategory, x => x.Category).FirstOrDefault();
+            expenseVm.Expense = _expenseRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, 
+                x => x.SubCategory, x => x.SubCategory.Category).FirstOrDefault();
             
             return View(expenseVm);
         }
@@ -89,7 +91,8 @@ namespace HomeBudget.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var expenseVm = CreateExpenseViewModelWithSelectLists();
-            expenseVm.Expense = _expenseRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.SubCategory, x => x.Category).FirstOrDefault();
+            expenseVm.Expense = _expenseRepository.GetWhereWithIncludes(e => e.Id == id, 
+                x => x.BankAccount, x => x.SubCategory, x => x.SubCategory.Category).FirstOrDefault();
             
             return View(expenseVm);
         }
@@ -120,7 +123,8 @@ namespace HomeBudget.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var expenseVm = new ExpenseViewModel();
-            expenseVm.Expense = _expenseRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.SubCategory, x => x.Category).FirstOrDefault();
+            expenseVm.Expense = _expenseRepository.GetWhereWithIncludes(e => e.Id == id,
+                x => x.BankAccount, x => x.SubCategory, x => x.SubCategory.Category).FirstOrDefault();
 
             return View(expenseVm);
         }
@@ -131,7 +135,8 @@ namespace HomeBudget.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             var expenseVm = new ExpenseViewModel();
-            expenseVm.Expense = _expenseRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, x => x.SubCategory, x => x.Category).FirstOrDefault();
+            expenseVm.Expense = _expenseRepository.GetWhereWithIncludes(e => e.Id == id,
+                x => x.BankAccount, x => x.SubCategory, x => x.SubCategory.Category).FirstOrDefault();
             _expenseRepository.Delete(expenseVm.Expense);
             _bankAccountLogic.CalculateBalanceOfAllAccounts();
 

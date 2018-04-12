@@ -40,15 +40,15 @@ namespace HomeBudget.Controllers
 
             var listOfExpenses = _expensesRepository
                 .GetWhereWithIncludes(t => t.BankAccountId == model.FinancialOperation.BankAccountId,
-                    e => e.Category, e => e.SubCategory, e => e.BankAccount);
+                    e => e.SubCategory.Category, e => e.SubCategory, e => e.BankAccount);
 
             listOfExpenses.ForEach(exp => exp.AmountOfMoney *= (-1));
-            listOfExpenses.ForEach(exp => exp.DescriptionOfOperation = @"Category: " + exp.Category.CategoryName + "<br/>" + " SubCategory: " + exp.SubCategory.SubCategoryName);
+            listOfExpenses.ForEach(exp => exp.DescriptionOfOperation = @"Category: " + exp.SubCategory.Category.CategoryName + "<br/>" + " SubCategory: " + exp.SubCategory.SubCategoryName);
 
 
             var listOfEarnings = _earningsRepository.GetWhereWithIncludes(t =>
-                     t.BankAccountId == model.FinancialOperation.BankAccountId, e => e.Category, e => e.SubCategory, e => e.BankAccount);
-            listOfEarnings.ForEach(earn => earn.DescriptionOfOperation = @"Category: " + earn.Category.CategoryName + "<br/>" + " SubCategory: " + earn.SubCategory.SubCategoryName);
+                     t.BankAccountId == model.FinancialOperation.BankAccountId, e => e.SubCategory.Category, e => e.SubCategory, e => e.BankAccount);
+            listOfEarnings.ForEach(earn => earn.DescriptionOfOperation = @"Category: " + earn.SubCategory.Category.CategoryName + "<br/>" + " SubCategory: " + earn.SubCategory.SubCategoryName);
 
             var listOfTransferIncomes =
                 _transferRepository.GetWhereWithIncludes(t => t.TargetBankAccountId == model.FinancialOperation.BankAccountId, e => e.SourceBankAccount, e => e.TargetBankAccount);
