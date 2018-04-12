@@ -259,6 +259,10 @@
     <Compile Include="Migrations\201804121621548_madeSomeIdsNullable.Designer.cs">
       <DependentUpon>201804121621548_madeSomeIdsNullable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804122048126_removedCategoryFromFinancialOperation.cs" />
+    <Compile Include="Migrations\201804122048126_removedCategoryFromFinancialOperation.Designer.cs">
+      <DependentUpon>201804122048126_removedCategoryFromFinancialOperation.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BankAccount.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -455,6 +459,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804121621548_madeSomeIdsNullable.resx">
       <DependentUpon>201804121621548_madeSomeIdsNullable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804122048126_removedCategoryFromFinancialOperation.resx">
+      <DependentUpon>201804122048126_removedCategoryFromFinancialOperation.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
