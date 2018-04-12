@@ -16,12 +16,9 @@
             @Html.DisplayNameFor(model => model.FinancialOperation.AmountOfMoney)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.FinancialOperation.SourceBankAccount)
+            @Html.LabelFor(model => model.FinancialOperation.SourceBankAccount,"From / To")
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FinancialOperation.TargetBankAccount)
-        </th>
-
+       
         <th>
             @Html.DisplayNameFor(model => model.FinancialOperation.Category.CategoryName)
         </th>
@@ -51,10 +48,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.SourceBankAccount.AccountName)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TargetBankAccount.AccountName)
-            </td>
-
+           
             <td>
                 @Html.DisplayFor(modelItem => item.Category.CategoryName)
             </td>

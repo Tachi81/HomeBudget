@@ -50,13 +50,16 @@ namespace HomeBudget.Controllers
                 expense.AmountOfMoney *= (-1);
             }
 
-            var listOfEarnings =
-                _earningsRepository.GetWhereWithIncludes(t =>
+            var listOfEarnings =_earningsRepository.GetWhereWithIncludes(t =>
                     t.BankAccountId == model.FinancialOperation.BankAccountId, e=>e.Category, e => e.SubCategory, e => e.BankAccount);
             
             var listOfTransferIncomes =
                 _transferRepository.GetWhereWithIncludes(t => t.TargetBankAccountId == model.FinancialOperation.BankAccountId, e => e.SourceBankAccount, e => e.TargetBankAccount);
 
+            foreach (var transferIncome in listOfTransferIncomes)
+            {
+                transferIncome.BankAccount = transferIncome.TargetBankAccount;
+            }
 
             var listOfTransferOutcomes =
                 _transferRepository.GetWhereWithIncludes(t => t.SourceBankAccountId == model.FinancialOperation.BankAccountId, e => e.SourceBankAccount, e => e.TargetBankAccount);
@@ -64,7 +67,8 @@ namespace HomeBudget.Controllers
             foreach (var transferOutcome in listOfTransferOutcomes)
             {
                 transferOutcome.AmountOfMoney *= (-1);
-
+                transferOutcome.BankAccount = transferOutcome.SourceBankAccount;
+                transferOutcome.SourceBankAccount = transferOutcome.TargetBankAccount;
             }
 
 
