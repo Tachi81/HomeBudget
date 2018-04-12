@@ -1,9 +1,6 @@
-﻿using System;
+﻿using HomeBudget.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using HomeBudget.Models;
 
 namespace HomeBudget.ViewModels
 {
@@ -11,8 +8,6 @@ namespace HomeBudget.ViewModels
     {
         public Transfer Transfer { get; set; }
         public List<Transfer> ListOfTransfers { get; set; }
-
-        public List<int> ListOfEditedAccountsId { get; set; }
 
         public IEnumerable<SelectListItem> SelectListOfBankAccounts { get; set; }
     }

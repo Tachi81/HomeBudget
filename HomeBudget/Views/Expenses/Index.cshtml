@@ -18,7 +18,7 @@
             @Html.DisplayNameFor(model => model.Expense.AmountOfMoney)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Expense.Category.CategoryName)
+            @Html.DisplayNameFor(model => model.Expense.SubCategory.Category.CategoryName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Expense.SubCategory.SubCategoryName)
@@ -41,7 +41,7 @@
             @Html.DisplayFor(modelItem => item.AmountOfMoney)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Category.CategoryName)
+            @Html.DisplayFor(modelItem => item.SubCategory.Category.CategoryName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.SubCategory.SubCategoryName)
