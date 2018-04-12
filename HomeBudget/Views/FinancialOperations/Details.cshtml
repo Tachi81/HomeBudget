@@ -16,15 +16,9 @@
             @Html.DisplayNameFor(model => model.FinancialOperation.AmountOfMoney)
         </th>
         <th>
-            @Html.LabelFor(model => model.FinancialOperation.SourceBankAccount,"From / To")
+            @Html.LabelFor(model => model.FinancialOperation.DescriptionOfOperation,"From / To")
         </th>
        
-        <th>
-            @Html.DisplayNameFor(model => model.FinancialOperation.Category.CategoryName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FinancialOperation.SubCategory.SubCategoryName)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.FinancialOperation.DateTime)
         </th>
@@ -46,15 +40,9 @@
             </td>
 
             <td>
-                @Html.DisplayFor(modelItem => item.SourceBankAccount.AccountName)
+              @Html.Raw(item.DescriptionOfOperation)
             </td>
            
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.CategoryName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SubCategory.SubCategoryName)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DateTime.DayOfWeek)
             </td>

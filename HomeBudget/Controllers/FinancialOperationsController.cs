@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Web;
-using System.Web.Mvc;
-using HomeBudget.DAL.Interfaces;
+﻿using HomeBudget.DAL.Interfaces;
 using HomeBudget.Models;
 using HomeBudget.ViewModels;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace HomeBudget.Controllers
 {
@@ -18,7 +15,7 @@ namespace HomeBudget.Controllers
         private readonly ITransferRepository _transferRepository;
 
         public FinancialOperationsController(IBankAccountRepository bankAccountRepository,
-            IEarningsRepository earningsRepository, IExpensesRepository expensesRepository, ITransferRepository transferRepository )
+            IEarningsRepository earningsRepository, IExpensesRepository expensesRepository, ITransferRepository transferRepository)
         {
             _bankAccountRepository = bankAccountRepository;
             _earningsRepository = earningsRepository;
@@ -35,42 +32,42 @@ namespace HomeBudget.Controllers
             return View(financialOperationsVm);
         }
 
-        
+
         public ActionResult Details(FinancialOperationsHistoryViewModel model)
         {
             model.ListofFinancialOperation = new List<FinancialOperation>();
 
 
             var listOfExpenses = _expensesRepository
-                .GetWhereWithIncludes(t => t.BankAccountId == model.FinancialOperation.BankAccountId, 
+                .GetWhereWithIncludes(t => t.BankAccountId == model.FinancialOperation.BankAccountId,
                     e => e.Category, e => e.SubCategory, e => e.BankAccount);
 
-            foreach (var expense in listOfExpenses)
-            {
-                expense.AmountOfMoney *= (-1);
-            }
+            listOfExpenses.ForEach(exp => exp.AmountOfMoney *= (-1));
+            listOfExpenses.ForEach(exp => exp.DescriptionOfOperation = @"Category: " + exp.Category.CategoryName + "<br/>" + " SubCategory: " + exp.SubCategory.SubCategoryName);
 
-            var listOfEarnings =_earningsRepository.GetWhereWithIncludes(t =>
-                    t.BankAccountId == model.FinancialOperation.BankAccountId, e=>e.Category, e => e.SubCategory, e => e.BankAccount);
-            
+
+            var listOfEarnings = _earningsRepository.GetWhereWithIncludes(t =>
+                     t.BankAccountId == model.FinancialOperation.BankAccountId, e => e.Category, e => e.SubCategory, e => e.BankAccount);
+            listOfEarnings.ForEach(earn => earn.DescriptionOfOperation = @"Category: " + earn.Category.CategoryName + "<br/>" + " SubCategory: " + earn.SubCategory.SubCategoryName);
+
             var listOfTransferIncomes =
                 _transferRepository.GetWhereWithIncludes(t => t.TargetBankAccountId == model.FinancialOperation.BankAccountId, e => e.SourceBankAccount, e => e.TargetBankAccount);
-
-            foreach (var transferIncome in listOfTransferIncomes)
+            listOfTransferIncomes.ForEach(transfer =>
             {
-                transferIncome.BankAccount = transferIncome.TargetBankAccount;
-            }
+                transfer.DescriptionOfOperation = transfer.SourceBankAccount.AccountName;
+                transfer.BankAccount = transfer.TargetBankAccount;
+            });
+
+
 
             var listOfTransferOutcomes =
                 _transferRepository.GetWhereWithIncludes(t => t.SourceBankAccountId == model.FinancialOperation.BankAccountId, e => e.SourceBankAccount, e => e.TargetBankAccount);
-            
-            foreach (var transferOutcome in listOfTransferOutcomes)
+            listOfTransferOutcomes.ForEach(transf =>
             {
-                transferOutcome.AmountOfMoney *= (-1);
-                transferOutcome.BankAccount = transferOutcome.SourceBankAccount;
-                transferOutcome.SourceBankAccount = transferOutcome.TargetBankAccount;
-            }
-
+                transf.AmountOfMoney *= (-1);
+                transf.DescriptionOfOperation = transf.TargetBankAccount.AccountName;
+                transf.BankAccount = transf.SourceBankAccount;
+            });
 
 
             model.ListofFinancialOperation.AddRange(listOfEarnings);
@@ -78,11 +75,12 @@ namespace HomeBudget.Controllers
             model.ListofFinancialOperation.AddRange(listOfTransferOutcomes);
             model.ListofFinancialOperation.AddRange(listOfTransferIncomes);
 
+
             return View(model);
         }
 
-       
-        
+
+
 
     }
 }
