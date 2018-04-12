@@ -1,13 +1,9 @@
-﻿using System.Linq;
-using System.Net;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography.X509Certificates;
-using System.Web.Mvc;
-using HomeBudget.Business_Logic;
+﻿using HomeBudget.Business_Logic;
 using HomeBudget.DAL.Interfaces;
-using HomeBudget.DAL.Repositories;
-using HomeBudget.Models;
 using HomeBudget.ViewModels;
+using System.Linq;
+using System.Net;
+using System.Web.Mvc;
 
 namespace HomeBudget.Controllers
 {
@@ -34,8 +30,8 @@ namespace HomeBudget.Controllers
         public ActionResult Index()
         {
             var expenseVm = new ExpenseViewModel();
-             expenseVm.ListOfExpenses = _expenseRepository.GetWhereWithIncludes(e => e.Id > 0, 
-                 x=>x.BankAccount, x=>x.SubCategory, x=>x.SubCategory.Category).ToList();
+            expenseVm.ListOfExpenses = _expenseRepository.GetWhereWithIncludes(e => e.Id > 0,
+                x => x.BankAccount, x => x.SubCategory, x => x.SubCategory.Category).ToList();
             return View(expenseVm);
         }
 
@@ -47,9 +43,9 @@ namespace HomeBudget.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var expenseVm = new ExpenseViewModel();
-            expenseVm.Expense = _expenseRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount, 
+            expenseVm.Expense = _expenseRepository.GetWhereWithIncludes(e => e.Id == id, x => x.BankAccount,
                 x => x.SubCategory, x => x.SubCategory.Category).FirstOrDefault();
-            
+
             return View(expenseVm);
         }
 
@@ -61,7 +57,7 @@ namespace HomeBudget.Controllers
             return View(expenseVm);
         }
 
-       
+
 
         // POST: Expenses/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -72,15 +68,17 @@ namespace HomeBudget.Controllers
         {
             if (ModelState.IsValid)
             {
+                expenseVm.Expense.SubCategory = _subCategoriesRepository
+                    .GetWhere(subc => subc.Id == expenseVm.Expense.SubCategoryId).FirstOrDefault();
                 _expenseRepository.Create(expenseVm.Expense);
-           
+
                 _bankAccountLogic.CalculateBalanceOfAllAccounts();
                 return RedirectToAction("Index");
             }
 
-             expenseVm = CreateExpenseViewModelWithSelectLists();
+            expenseVm = CreateExpenseViewModelWithSelectLists();
             return View(expenseVm);
-           
+
         }
 
         // GET: Expenses/Edit/5
@@ -91,9 +89,9 @@ namespace HomeBudget.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             var expenseVm = CreateExpenseViewModelWithSelectLists();
-            expenseVm.Expense = _expenseRepository.GetWhereWithIncludes(e => e.Id == id, 
+            expenseVm.Expense = _expenseRepository.GetWhereWithIncludes(e => e.Id == id,
                 x => x.BankAccount, x => x.SubCategory, x => x.SubCategory.Category).FirstOrDefault();
-            
+
             return View(expenseVm);
         }
 
@@ -106,12 +104,14 @@ namespace HomeBudget.Controllers
         {
             if (ModelState.IsValid)
             {
+                expenseVm.Expense.SubCategory = _subCategoriesRepository
+                    .GetWhere(subc => subc.Id == expenseVm.Expense.SubCategoryId).FirstOrDefault();
                 _expenseRepository.Update(expenseVm.Expense);
                 _bankAccountLogic.CalculateBalanceOfAllAccounts();
                 return RedirectToAction("Index");
             }
 
-           
+
             return View(expenseVm);
         }
 

@@ -247,21 +247,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201804111115397_createDB.cs" />
-    <Compile Include="Migrations\201804111115397_createDB.Designer.cs">
-      <DependentUpon>201804111115397_createDB.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804121606033_addedDescriptionOfOperation.cs" />
-    <Compile Include="Migrations\201804121606033_addedDescriptionOfOperation.Designer.cs">
-      <DependentUpon>201804121606033_addedDescriptionOfOperation.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804121621548_madeSomeIdsNullable.cs" />
-    <Compile Include="Migrations\201804121621548_madeSomeIdsNullable.Designer.cs">
-      <DependentUpon>201804121621548_madeSomeIdsNullable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201804122048126_removedCategoryFromFinancialOperation.cs" />
-    <Compile Include="Migrations\201804122048126_removedCategoryFromFinancialOperation.Designer.cs">
-      <DependentUpon>201804122048126_removedCategoryFromFinancialOperation.cs</DependentUpon>
+    <Compile Include="Migrations\201804122107559_createDB.cs" />
+    <Compile Include="Migrations\201804122107559_createDB.Designer.cs">
+      <DependentUpon>201804122107559_createDB.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BankAccount.cs" />
@@ -451,17 +439,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201804111115397_createDB.resx">
-      <DependentUpon>201804111115397_createDB.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804121606033_addedDescriptionOfOperation.resx">
-      <DependentUpon>201804121606033_addedDescriptionOfOperation.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804121621548_madeSomeIdsNullable.resx">
-      <DependentUpon>201804121621548_madeSomeIdsNullable.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201804122048126_removedCategoryFromFinancialOperation.resx">
-      <DependentUpon>201804122048126_removedCategoryFromFinancialOperation.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201804122107559_createDB.resx">
+      <DependentUpon>201804122107559_createDB.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
