@@ -255,6 +255,10 @@
     <Compile Include="Migrations\201804121606033_addedDescriptionOfOperation.Designer.cs">
       <DependentUpon>201804121606033_addedDescriptionOfOperation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804121621548_madeSomeIdsNullable.cs" />
+    <Compile Include="Migrations\201804121621548_madeSomeIdsNullable.Designer.cs">
+      <DependentUpon>201804121621548_madeSomeIdsNullable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BankAccount.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -448,6 +452,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201804121606033_addedDescriptionOfOperation.resx">
       <DependentUpon>201804121606033_addedDescriptionOfOperation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804121621548_madeSomeIdsNullable.resx">
+      <DependentUpon>201804121621548_madeSomeIdsNullable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
