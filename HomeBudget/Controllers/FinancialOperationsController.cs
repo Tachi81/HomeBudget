@@ -38,23 +38,42 @@ namespace HomeBudget.Controllers
         
         public ActionResult Details(FinancialOperationsHistoryViewModel model)
         {
+            model.ListofFinancialOperation = new List<FinancialOperation>();
+
+
             var listOfExpenses = _expensesRepository
-                .GetWhereWithIncludes(t => t.BankAccountId == model.FinancialOperation.BankAccountId, e => e.Category, e => e.SubCategory, e => e.BankAccount);
+                .GetWhereWithIncludes(t => t.BankAccountId == model.FinancialOperation.BankAccountId, 
+                    e => e.Category, e => e.SubCategory, e => e.BankAccount);
+
+            foreach (var expense in listOfExpenses)
+            {
+                expense.AmountOfMoney *= (-1);
+            }
+
             var listOfEarnings =
                 _earningsRepository.GetWhereWithIncludes(t =>
                     t.BankAccountId == model.FinancialOperation.BankAccountId, e=>e.Category, e => e.SubCategory, e => e.BankAccount);
-
+            
             var listOfTransferIncomes =
-                _transferRepository.GetWhereWithIncludes(t => t.SourceBankAccountId == model.FinancialOperation.BankAccountId, e => e.SourceBankAccount, e => e.TargetBankAccount);
-            var listOfTransferOutcomes =
                 _transferRepository.GetWhereWithIncludes(t => t.TargetBankAccountId == model.FinancialOperation.BankAccountId, e => e.SourceBankAccount, e => e.TargetBankAccount);
 
-            model.ListofFinancialOperation = new List<FinancialOperation>();
+
+            var listOfTransferOutcomes =
+                _transferRepository.GetWhereWithIncludes(t => t.SourceBankAccountId == model.FinancialOperation.BankAccountId, e => e.SourceBankAccount, e => e.TargetBankAccount);
+            
+            foreach (var transferOutcome in listOfTransferOutcomes)
+            {
+                transferOutcome.AmountOfMoney *= (-1);
+
+            }
+
+
 
             model.ListofFinancialOperation.AddRange(listOfEarnings);
             model.ListofFinancialOperation.AddRange(listOfExpenses);
             model.ListofFinancialOperation.AddRange(listOfTransferOutcomes);
             model.ListofFinancialOperation.AddRange(listOfTransferIncomes);
+
             return View(model);
         }
 
