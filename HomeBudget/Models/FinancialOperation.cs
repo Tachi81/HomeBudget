@@ -14,6 +14,8 @@ namespace HomeBudget.Models
         public int CategoryId { get; set; }
         public int SubCategoryId { get; set; }
 
+        public string DescriptionOfOperation { get; set; }
+
         public int SourceBankAccountId { get; set; }
         public int TargetBankAccountId { get; set; }
 
